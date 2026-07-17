@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "CiFluc Gemini Casillas",
+    "slug": "casillas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/cifluc-splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
+    "android": {
+      "package": "com.cifluc.casillas",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "privacyPolicyUrl": "https://cifluc.github.io/Cifluc_Casillas/"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a332a44c-7d34-4398-acde-9477c23dbe92"
+      }
+    },
+    "owner": "bezalieuapp",
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "recordAudioAndroid": false
+        }
+      ],
+      "expo-asset"
+    ]
+  }
+}
