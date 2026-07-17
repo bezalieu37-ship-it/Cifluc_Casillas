@@ -134,7 +134,7 @@ export default function SobreScreen({ navigation }) {
         <Card titulo={t('sobre.privacy')}>
           <Text style={s.paragraph}>{t('sobre.privacyText')}</Text>
           <TouchableOpacity
-            onPress={() => Linking.openURL('https://cifluc.github.io/Cifluc_Casillas/')}
+            onPress={() => Linking.openURL('https://bezalieu37-ship-it.github.io/Cifluc_Casillas/')}
             style={{ marginTop: 8 }}
           >
             <Text style={{ color: theme.yellow, fontSize: 12, fontWeight: 'bold', textDecorationLine: 'underline' }}>
