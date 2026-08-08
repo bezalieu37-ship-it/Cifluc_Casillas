@@ -27,36 +27,36 @@ CiFluc Gemini Casillas é uma calculadora técnica completa para profissionais d
 
 **12 Módulos Técnicos:**
 
-1. **Roscas** — Métrica, Whitworth, Trapezoidal, ACME, Quadrada, UN, UNF, UNS, UNC, Rosca de Vidro, Gás, Whitworth Gás, BSPT. Cálculo de alturas, diâmetros, ângulos e geração de G-code (Fanuc, Siemens, Haas, Mazak, Heidenhain, Okuma, Haas NGC).
+1. **Roscas** — Métrica Grossa, Métrica Fina, UNC, UNF, Whitworth BSW, Whitworth BSF, BSP, NPT, Trapezoidal, ACME, Quadrada, Redonda (DIN 405) e Dente de Serra. Cálculo completo de alturas, diâmetros, ângulos e cotações. Geração de G-code para 5 controladores CNC (Fanuc, Siemens, Mitsubishi, Haas e Mach3).
 
-2. **Engrenagens** — Retas, helicoidais, cónicas e de cremalheira. Módulo, dentes, diâmetros, passo circular, espessura e parâmetros técnicos.
+2. **Engrenagens** — Retas, helicoidais, cónicas, cremalheira, sem-fim e planetárias. Módulo, dentes, diâmetros primitivo e externo, passo circular, espessura e parâmetros técnicos.
 
-3. **RPM / Vc** — Rotação, velocidade de corte, avanço, taxa de remoção de material e parâmetros de usinagem.
+3. **RPM / Vc** — Torneamento, fresamento, furação, avanço e tempo de usinagem. Rotação, velocidade de corte, taxa de remoção de material e parâmetros de corte.
 
-4. **Cones** — Conicidade, ângulo, diâmetros maior e menor, comprimento eOffsetTable offset de torneira.
+4. **Cones** — Conicidade, ângulo, diâmetros maior e menor, comprimento e offset de torneira. Tabela de cones Morse inclusa.
 
 5. **Perfis** — Sextavados, octógons, polígonos regulares, coordenadas XY e conversão para CNC.
 
-6. **Divisor** — Divisão angular, número de furos, setores,盘rotação do prato e configurações de divisor.
+6. **Divisor** — Divisão angular, número de furos, setores, rotação do prato e configurações de divisor com tabela de discos.
 
-7. **Furação PCD** — Coordenadas X/Y em círculo primitivo para furação em padrão.
+7. **Furação PCD** — Coordenadas X/Y em círculo primitivo para furação em padrão circular.
 
-8. **Ajustes ISO** — Folga, interferência, eixo, furo, tolerância e selects de ajuste (H7/g6, H7/p6, etc.).
+8. **Ajustes ISO** — Folga, interferência, eixo, furo, tolerância e selects de ajuste (H7/g6, H7/p6, etc.) com código G.
 
-9. **Trigonometria** — Seno, cosseno, tangente, arco, triângulos retângulos e obliquos.
+9. **Trigonometria** — Seno, cosseno, tangente, arco, triângulos retângulos e obliquos com geração de G-code.
 
-10. **Conversões** — mm/polegadas, RPM, Vc, TPI, pressão (PSI/bar), massa e volume.
+10. **Conversões** — mm/polegadas, RPM, Vc, TPI, pressão (PSI/bar), massa e volume com 6 abas de conversão.
 
-11. **Materiais** — Tabela de Vc, dureza, tipo de ferramenta, avanço recomendado e aplicação para aços, inox, alumínio, cobre e mais.
+11. **Materiais** — Tabela de Vc, dureza (HB/HRC), tipo de ferramenta, avanço recomendado e aplicação para aços, inox, alumínio, cobre, bronze e latão.
 
-12. **Recartilhas** — Externa, interna, corte, deformação, parâmetros e G-code.
+12. **Recartilhas** — Externa (reta, cruzada, diamantada, helicoidal), interna, corte e deformação. Parâmetros e geração de G-code.
 
 **Recursos:**
-- Geração de código G para 7 controladores CNC
-- Relatórios técnicos exportáveis
+- Geração de código G para 5 controladores CNC (Fanuc, Siemens, Mitsubishi, Haas e Mach3)
+- Relatórios técnicos exportáveis e compartilháveis
 - 4 idiomas: Português, Inglês, Espanhol e Francês
 - Tema escuro e claro
-- Histórico de cálculos salvo no dispositivo
+- Histórico de cálculos salvo no dispositivo (até 50 registros)
 - Backup e exportação de dados
 - Totalmente offline — sem coleta de dados
 
@@ -70,36 +70,36 @@ CiFluc Gemini Casillas is a complete technical calculator for machining, CNC and
 
 **12 Technical Modules:**
 
-1. **Threads** — Metric, Whitworth, Trapezoidal, ACME, Square, UN, UNF, UNS, UNC, Glass Thread, Gas, Whitworth Gas, BSPT. Height, diameter, angle calculations and G-code generation (Fanuc, Siemens, Haas, Mazak, Heidenhain, Okuma, Haas NGC).
+1. **Threads** — Metric Coarse, Metric Fine, UNC, UNF, Whitworth BSW, Whitworth BSF, BSP, NPT, Trapezoidal, ACME, Square, Round (DIN 405) and Sawtooth. Complete calculation of heights, diameters, angles and dimensions. G-code generation for 5 CNC controllers (Fanuc, Siemens, Mitsubishi, Haas and Mach3).
 
-2. **Gears** — Spur, helical, bevel and rack. Module, teeth, diameters, circular pitch, thickness and technical parameters.
+2. **Gears** — Spur, helical, bevel, rack, worm and planetary. Module, teeth, pitch and external diameters, circular pitch, thickness and technical parameters.
 
-3. **RPM / Vc** — Speed, cutting velocity, feed, material removal rate and machining parameters.
+3. **RPM / Vc** — Turning, milling, drilling, feed and machining time. Speed, cutting velocity, material removal rate and cutting parameters.
 
-4. **Tapers** — Taper ratio, angle, major/minor diameters, length and taper turning offset.
+4. **Tapers** — Taper ratio, angle, major/minor diameters, length and turning offset. Morse taper table included.
 
 5. **Profiles** — Hexagons, octagons, regular polygons, XY coordinates and CNC conversion.
 
-6. **Dividing Head** — Angular division, hole count, sectors, chuck rotation and divider configurations.
+6. **Dividing Head** — Angular division, hole count, sectors, chuck rotation and divider configurations with disc table.
 
 7. **PCD Drilling** — X/Y coordinates on bolt circle for pattern drilling.
 
-8. **ISO Fits** — Clearance, interference, shaft, hole, tolerance and fit selections (H7/g6, H7/p6, etc.).
+8. **ISO Fits** — Clearance, interference, shaft, hole, tolerance and fit selections (H7/g6, H7/p6, etc.) with G-code.
 
-9. **Trigonometry** — Sine, cosine, tangent, arc, right and oblique triangles.
+9. **Trigonometry** — Sine, cosine, tangent, arc, right and oblique triangles with G-code generation.
 
-10. **Conversions** — mm/inch, RPM, Vc, TPI, pressure (PSI/bar), mass and volume.
+10. **Conversions** — mm/inch, RPM, Vc, TPI, pressure (PSI/bar), mass and volume with 6 conversion tabs.
 
-11. **Materials** — Vc table, hardness, tool type, recommended feed and application for steels, stainless, aluminum, copper and more.
+11. **Materials** — Vc table, hardness (HB/HRC), tool type, recommended feed and application for steels, stainless, aluminum, copper, bronze and brass.
 
-12. **Knurling** — External, internal, cut, forming, parameters and G-code.
+12. **Knurling** — External (straight, diamond, helical), internal, cut and forming. Parameters and G-code generation.
 
 **Features:**
-- G-code generation for 7 CNC controllers
-- Exportable technical reports
+- G-code generation for 5 CNC controllers (Fanuc, Siemens, Mitsubishi, Haas and Mach3)
+- Exportable and shareable technical reports
 - 4 languages: Portuguese, English, Spanish and French
 - Dark and light themes
-- Calculation history saved on device
+- Calculation history saved on device (up to 50 records)
 - Data backup and export
 - Fully offline — no data collection
 
@@ -113,36 +113,36 @@ CiFluc Gemini Casillas es una calculadora técnica completa para profesionales d
 
 **12 Módulos Técnicos:**
 
-1. **Roscas** — Métrica, Whitworth, Trapezoidal, ACME, Cuadrada, UN, UNF, UNS, UNC, Rosca de Vidrio, Gas, Whitworth Gas, BSPT. Cálculo de alturas, diámetros, ángulos y generación de G-code (Fanuc, Siemens, Haas, Mazak, Heidenhain, Okuma, Haas NGC).
+1. **Roscas** — Métrica Gruesa, Métrica Fina, UNC, UNF, Whitworth BSW, Whitworth BSF, BSP, NPT, Trapezoidal, ACME, Cuadrada, Redonda (DIN 405) y Diente de Sierra. Cálculo completo de alturas, diámetros, ángulos y cotizaciones. Generación de G-code para 5 controladores CNC (Fanuc, Siemens, Mitsubishi, Haas y Mach3).
 
-2. **Engranajes** — Rectos, helicoidales, cónicos y de cremallera. Módulo, dientes, diámetros, paso circular, espesor y parámetros técnicos.
+2. **Engranajes** — Rectos, helicoidales, cónicos, cremallera, sin fin y planetarios. Módulo, dientes, diámetros primitivo y externo, paso circular, espesor y parámetros técnicos.
 
-3. **RPM / Vc** — Rotación, velocidad de corte, avance, tasa de remoción de material y parámetros de mecanizado.
+3. **RPM / Vc** — Torneado, fresado, taladrado, avance y tiempo de mecanizado. Rotación, velocidad de corte, tasa de remoción de material y parámetros de corte.
 
-4. **Conos** — Conicidad, ángulo, diámetros mayor y menor, longitud y offset de tornos.
+4. **Conos** — Conicidad, ángulo, diámetros mayor y menor, longitud y offset de tornos. Tabla de conos Morse incluida.
 
 5. **Perfiles** — Hexágonos, octógonos, polígonos regulares, coordenadas XY y conversión CNC.
 
-6. **Divisor** — División angular, número de agujeros, sectores, rotación del plato y configuraciones.
+6. **Divisor** — División angular, número de agujeros, sectores, rotación del plato y configuraciones con tabla de discos.
 
-7. **Taladrado PCD** — Coordenadas X/Y en círculo primitivo para taladrado en patrón.
+7. **Taladrado PCD** — Coordenadas X/Y en círculo primitivo para taladrado en patrón circular.
 
-8. **Ajustes ISO** — Holgura, interferencia, eje, taladro, tolerancia y selecciones (H7/g6, H7/p6, etc.).
+8. **Ajustes ISO** — Holgura, interferencia, eje, taladro, tolerancia y selecciones (H7/g6, H7/p6, etc.) con código G.
 
-9. **Trigonometria** — Seno, coseno, tangente, arco, triángulos rectángulos y oblicuos.
+9. **Trigonometria** — Seno, coseno, tangente, arco, triángulos rectángulos y oblicuos con generación de G-code.
 
-10. **Conversiones** — mm/pulgadas, RPM, Vc, TPI, presión (PSI/bar), masa y volumen.
+10. **Conversiones** — mm/pulgadas, RPM, Vc, TPI, presión (PSI/bar), masa y volumen con 6 pestañas de conversión.
 
-11. **Materiales** — Tabla de Vc, dureza, tipo de herramienta, avance recomendado y aplicación para aceros, inox, aluminio, cobre y más.
+11. **Materiales** — Tabla de Vc, dureza (HB/HRC), tipo de herramienta, avance recomendado y aplicación para aceros, inox, aluminio, cobre, bronce y latón.
 
-12. **Recartilhas** — Externa, interna, corte, deformación, parámetros y G-code.
+12. **Recartilhas** — Externa (recta, cruzada, diamantada, helicoidal), interna, corte y deformación. Parámetros y generación de G-code.
 
 **Características:**
-- Generación de código G para 7 controladores CNC
-- Informes técnicos exportables
+- Generación de código G para 5 controladores CNC (Fanuc, Siemens, Mitsubishi, Haas y Mach3)
+- Informes técnicos exportables y compartibles
 - 4 idiomas: Portugués, Inglés, Español y Francés
 - Temas oscuro y claro
-- Historial de cálculos guardado en el dispositivo
+- Historial de cálculos guardado en el dispositivo (hasta 50 registros)
 - Copia de seguridad y exportación de datos
 - Totalmente offline — sin recopilación de datos
 
@@ -156,36 +156,36 @@ CiFluc Gemini Casillas est une calculatrice technique complète pour les profess
 
 **12 Modules Techniques:**
 
-1. **Filetages** — Métrique, Whitworth, Trapézoïdal, ACME, Carré, UN, UNF, UNS, UNC, Filetage à vis, Gaz, Whitworth Gaz, BSPT. Calculs de hauteurs, diamètres, angles et génération de G-code (Fanuc, Siemens, Haas, Mazak, Heidenhain, Okuma, Haas NGC).
+1. **Filetages** — Métrique Pas Gros, Métrique Pas Fin, UNC, UNF, Whitworth BSW, Whitworth BSF, BSP, NPT, Trapézoïdal, ACME, Carré, Ronde (DIN 405) et Dent de Scie. Calcul complet des hauteurs, diamètres, angles et cotes. Génération de G-code pour 5 contrôleurs CNC (Fanuc, Siemens, Mitsubishi, Haas et Mach3).
 
-2. **Engrenages** — Droits, hélicoïdaux, coniques et à crémaillère. Module, dents, diamètres, pas circulaire, épaisseur et paramètres techniques.
+2. **Engrenages** — Droits, hélicoïdaux, coniques, à crémaillère, à vis sans fin et planétaires. Module, dents, diamètres primitif et extérieur, pas circulaire, épaisseur et paramètres techniques.
 
-3. **RPM / Vc** — Vitesse, vitesse de coupe, avance, débit d'enlèvement et paramètres d'usinage.
+3. **RPM / Vc** — Tournage, fraisage, perçage, avance et temps d'usinage. Vitesse, vitesse de coupe, débit d'enlèvement et paramètres de coupe.
 
-4. **Cones** — Conicité, angle, diamètres majeur et mineur, longueur et offset de tour.
+4. **Cones** — Conicité, angle, diamètres majeur et mineur, longueur et offset de tour. Tableau des cônes Morse inclus.
 
 5. **Profils** — Hexagones, octogones, polygones réguliers, coordonnées XY et conversion CNC.
 
-6. **Diviseur** — Division angulaire, nombre de trous, secteurs, rotation du mandrin et configurations.
+6. **Diviseur** — Division angulaire, nombre de trous, secteurs, rotation du mandrin et configurations avec tableau de disques.
 
-7. **Perçage PCD** — Coordonnées X/Y sur cercle primitif pour perçage en motif.
+7. **Perçage PCD** — Coordonnées X/Y sur cercle primitif pour perçage en motif circulaire.
 
-8. **Jeu ISO** — Jeu, interférence, arbre, trou, tolérance et sélections (H7/g6, H7/p6, etc.).
+8. **Jeu ISO** — Jeu, interférence, arbre, trou, tolérance et sélections (H7/g6, H7/p6, etc.) avec code G.
 
-9. **Trigonométrie** — Sinus, cosinus, tangente, arc, triangles rectangles et obliques.
+9. **Trigonométrie** — Sinus, cosinus, tangente, arc, triangles rectangles et obliques avec génération de G-code.
 
-10. **Conversions** — mm/pouces, RPM, Vc, TPI, pression (PSI/bar), masse et volume.
+10. **Conversions** — mm/pouces, RPM, Vc, TPI, pression (PSI/bar), masse et volume avec 6 onglets de conversion.
 
-11. **Matériaux** — Tableau Vc, dureté, type d'outil, avance recommandée et application pour aciers, inox, aluminium, cuivre et plus.
+11. **Matériaux** — Tableau Vc, dureté (HB/HRC), type d'outil, avance recommandée et application pour aciers, inox, aluminium, cuivre, bronze et laiton.
 
-12. **Filetage à rabot** — Externe, interne, coupé, formé, paramètres et G-code.
+12. **Moletage** — Externe (droit, croisé, hélicoïdal), interne, coupé et formé. Paramètres et génération de G-code.
 
 **Fonctionnalités:**
-- Génération de code G pour 7 contrôleurs CNC
-- Rapports techniques exportables
+- Génération de code G pour 5 contrôleurs CNC (Fanuc, Siemens, Mitsubishi, Haas et Mach3)
+- Rapports techniques exportables et partageables
 - 4 langues : Portugais, Anglais, Espagnol et Français
 - Thèmes sombre et clair
-- Historique des calculs sauvegardé sur l'appareil
+- Historique des calculs sauvegardé sur l'appareil (jusqu'à 50 enregistrements)
 - Sauvegarde et exportation des données
 - Entièrement hors ligne — aucune collecte de données
 
@@ -200,7 +200,7 @@ CiFluc Gemini Casillas est une calculatrice technique complète pour les profess
 **Todos** (Everyone) — sem conteúdo restrito, sem compras in-app, sem anúncios
 
 ## Tags (Play Store)
-usinagem, CNC, calculadora técnica, roscas, engrenagens, G-code, engenharia mecânica, machining, threads, gears, trigonometria, ajustes ISO, materiais, konvexe, tornearia, fresagem
+usinagem, CNC, calculadora técnica, roscas, engrenagens, G-code, engenharia mecânica, machining, threads, gears, trigonometria, ajustes ISO, materiais, tornearia, fresagem
 
 ## Contact
 - Email: cifluc.suporte@gmail.com

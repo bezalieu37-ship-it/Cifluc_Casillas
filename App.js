@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { LanguageProvider, useLanguage } from './src/contexts/LanguageContext';
 import { ThemeProvider } from './src/contexts/ThemeContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
 
 function ErrorFallback({ error, onReset }) {
@@ -97,12 +98,14 @@ const errorStyles = StyleSheet.create({
 
 export default function App() {
   return (
-    <LanguageProvider>
-      <ErrorBoundary>
-        <ThemeProvider>
-          <AppNavigator />
-        </ThemeProvider>
-      </ErrorBoundary>
-    </LanguageProvider>
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <ErrorBoundary>
+          <ThemeProvider>
+            <AppNavigator />
+          </ThemeProvider>
+        </ErrorBoundary>
+      </LanguageProvider>
+    </SafeAreaProvider>
   );
 }

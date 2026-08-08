@@ -29,7 +29,7 @@ const STORAGE_CONFIG_KEY = '@CIFLUC_CASILLAS_CONFIG';
 const DEFAULT_CONFIG = {
   controladorPadrao: 'FANUC',
   casasDecimais: 3,
-  notificacoes: true,
+  audioEnabled: true,
   somenteMM: true
 };
 
@@ -65,7 +65,7 @@ export default function ConfigScreen({ navigation }) {
 
       setQtdeHistorico(historico.length);
     } catch (error) {
-      console.log('Erro ao carregar dados:', error);
+      // Erro silencioso — dados ficam com DEFAULT_CONFIG
     } finally {
       setCarregando(false);
     }
@@ -106,8 +106,8 @@ export default function ConfigScreen({ navigation }) {
     );
   }
 
-  function toggleNotificacoes() {
-    salvarConfig({ ...config, notificacoes: !config.notificacoes });
+  function toggleAudio() {
+    salvarConfig({ ...config, audioEnabled: !config.audioEnabled });
   }
 
   function toggleSomenteMM() {
@@ -313,14 +313,14 @@ export default function ConfigScreen({ navigation }) {
         <Card titulo={t('config.preferencesTitle')}>
           <View style={s.switchRow}>
             <View style={s.switchInfo}>
-              <Text style={s.switchLabel}>{t('config.notifications')}</Text>
-              <Text style={s.switchDesc}>{t('config.notificationsDesc')}</Text>
+              <Text style={s.switchLabel}>{t('config.audio')}</Text>
+              <Text style={s.switchDesc}>{t('config.audioDesc')}</Text>
             </View>
             <Switch
-              value={config.notificacoes}
-              onValueChange={toggleNotificacoes}
+              value={config.audioEnabled}
+              onValueChange={toggleAudio}
               trackColor={{ false: theme.switchTrack, true: theme.switchTrackActive }}
-              thumbColor={config.notificacoes ? theme.yellow : theme.mutedLight}
+              thumbColor={config.audioEnabled ? theme.yellow : theme.mutedLight}
             />
           </View>
 

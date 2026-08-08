@@ -1,25 +1,5 @@
 import { formatarGcode } from '../utils/formatters';
 
-function gerarFanuc(lines) {
-  return lines.join('\n');
-}
-
-function gerarSiemens(lines) {
-  return lines.join('\n');
-}
-
-function gerarMitsubishi(lines) {
-  return lines.join('\n');
-}
-
-function gerarHaas(lines) {
-  return lines.join('\n');
-}
-
-function gerarMach3(lines) {
-  return lines.join('\n');
-}
-
 export function gerarGcode(tipo, dados, controle) {
   const lines = [];
   

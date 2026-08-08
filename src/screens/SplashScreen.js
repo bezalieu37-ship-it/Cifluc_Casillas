@@ -7,10 +7,12 @@ import {
   Image
 } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { useTheme } from '../contexts/ThemeContext';
 
 const audioSource = require('../../assets/audio/intro.mp3');
+const STORAGE_CONFIG_KEY = '@CIFLUC_CASILLAS_CONFIG';
 
 export default function SplashScreen({ navigation }) {
   const { theme } = useTheme();
@@ -24,6 +26,12 @@ export default function SplashScreen({ navigation }) {
 
     async function iniciarAudio() {
       try {
+        const configSalva = await AsyncStorage.getItem(STORAGE_CONFIG_KEY);
+        const config = configSalva ? JSON.parse(configSalva) : {};
+        const audioEnabled = config.audioEnabled !== false;
+
+        if (!audioEnabled) return;
+
         await setAudioModeAsync({
           playsInSilentMode: true,
           interruptionMode: 'mixWithOthers',
@@ -33,7 +41,7 @@ export default function SplashScreen({ navigation }) {
         player.volume = 1.0;
         player.play();
       } catch (error) {
-        console.log('ERRO AUDIO SPLASH:', error);
+        // Áudio é opcional — falha silenciosa
       }
     }
 

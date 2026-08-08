@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main, release/*]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci --legacy-peer-deps
+      - name: Lint
+        run: npx eslint src/ --ext .js,.jsx --max-warnings 0
+      - name: Format check
+        run: npx prettier --check 'src/**/*.{js,jsx,json}'
+      - name: Unit tests
+        run: npx jest --passWithNoTests --ci
+      - name: i18n validation
+        run: node scripts/validate-i18n.js

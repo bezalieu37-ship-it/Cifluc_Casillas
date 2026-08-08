@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 
 import CasillasLayout, {
-  casillasStyles as styles
+  getCasillasStyles
 } from '../components/CasillasLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 const SUBABAS = [
   'Triângulo Retângulo',
@@ -37,6 +38,8 @@ const CONTROLES = ['FANUC', 'SIEMENS', 'MITSUBISHI', 'HAAS', 'MACH3'];
 
 export default function TrigonometriaScreen({ navigation }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const s = getCasillasStyles(theme);
   const [subAba, setSubAba] = useState('Triângulo Retângulo');
   const [controle, setControle] = useState('FANUC');
 
@@ -382,10 +385,10 @@ export default function TrigonometriaScreen({ navigation }) {
 
   function renderCampo(label, valor, campo) {
     return (
-      <View style={styles.boxInputHalf}>
-        <Text style={styles.labelInput}>{label}</Text>
+      <View style={s.boxInputHalf}>
+        <Text style={s.labelInput}>{label}</Text>
         <TextInput
-          style={styles.input}
+          style={s.input}
           value={valor}
           onChangeText={(txt) => atualizarCampo(campo, txt)}
           keyboardType="numeric"
@@ -397,7 +400,7 @@ export default function TrigonometriaScreen({ navigation }) {
   function renderCamposEntrada() {
     if (subAba === 'Triângulo Retângulo') {
       return (
-        <View style={styles.gridInputs}>
+        <View style={s.gridInputs}>
           {renderCampo(t('trigonometria.legX'), catetoX, 'catetoX')}
           {renderCampo(t('trigonometria.legY'), catetoY, 'catetoY')}
         </View>
@@ -406,7 +409,7 @@ export default function TrigonometriaScreen({ navigation }) {
 
     if (subAba === 'Seno/Cosseno/Tangente') {
       return (
-        <View style={styles.gridInputs}>
+        <View style={s.gridInputs}>
           {renderCampo(t('trigonometria.angle'), angulo, 'angulo')}
           {renderCampo(t('trigonometria.hypotenuseRadius'), hipotenusa, 'hipotenusa')}
         </View>
@@ -419,7 +422,7 @@ export default function TrigonometriaScreen({ navigation }) {
       subAba === 'Coordenadas CNC'
     ) {
       return (
-        <View style={styles.gridInputs}>
+        <View style={s.gridInputs}>
           {renderCampo(t('trigonometria.angle'), angulo, 'angulo')}
           {renderCampo(t('trigonometria.radius'), raio, 'raio')}
         </View>
@@ -428,7 +431,7 @@ export default function TrigonometriaScreen({ navigation }) {
 
     if (subAba === 'Cartesiano → Polar') {
       return (
-        <View style={styles.gridInputs}>
+        <View style={s.gridInputs}>
           {renderCampo(t('trigonometria.coordinateX'), coordX, 'coordX')}
           {renderCampo(t('trigonometria.coordinateY'), coordY, 'coordY')}
         </View>
@@ -437,7 +440,7 @@ export default function TrigonometriaScreen({ navigation }) {
 
     if (subAba === 'Chanfro / Inclinação') {
       return (
-        <View style={styles.gridInputs}>
+        <View style={s.gridInputs}>
           {renderCampo(t('trigonometria.chamferBase'), baseChanfro, 'baseChanfro')}
           {renderCampo(t('trigonometria.chamferHeight'), alturaChanfro, 'alturaChanfro')}
         </View>
@@ -456,8 +459,8 @@ export default function TrigonometriaScreen({ navigation }) {
       terminalText={terminalTrig}
       shareText={relatorio}
     >
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.subTabsTitle')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.subTabsTitle')}</Text>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {SUBABAS.map((item) => (
@@ -465,13 +468,13 @@ export default function TrigonometriaScreen({ navigation }) {
               key={item}
               onPress={() => trocarSubAba(item)}
               style={[
-                styles.btnTipo,
-                subAba === item && styles.btnTipoAtivo
+                s.btnTipo,
+                subAba === item && s.btnTipoAtivo
               ]}
             >
               <Text style={[
-                styles.btnTipoText,
-                subAba === item && styles.btnTipoTextAtivo
+                s.btnTipoText,
+                subAba === item && s.btnTipoTextAtivo
               ]}>
                 {subTabLabel(item)}
               </Text>
@@ -480,28 +483,28 @@ export default function TrigonometriaScreen({ navigation }) {
         </ScrollView>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.inputData')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.inputData')}</Text>
         {renderCamposEntrada()}
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.graphicTitle')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.graphicTitle')}</Text>
 
         <View style={{
           height: 220,
-          backgroundColor: '#030303',
+          backgroundColor: theme.terminalBg,
           borderWidth: 1,
-          borderColor: '#222',
+          borderColor: theme.border,
           borderRadius: 6,
           position: 'relative',
           overflow: 'hidden'
         }}>
-          <View style={{ position: 'absolute', left: 25, right: 25, top: 110, height: 1, backgroundColor: '#444' }} />
-          <View style={{ position: 'absolute', left: 110, top: 20, bottom: 20, width: 1, backgroundColor: '#444' }} />
+          <View style={{ position: 'absolute', left: 25, right: 25, top: 110, height: 1, backgroundColor: theme.mutedLight }} />
+          <View style={{ position: 'absolute', left: 110, top: 20, bottom: 20, width: 1, backgroundColor: theme.mutedLight }} />
 
-          <View style={{ position: 'absolute', left: 110, top: 110, width: 110, height: 3, backgroundColor: '#FFD400' }} />
-          <View style={{ position: 'absolute', left: 217, top: 50, width: 3, height: 63, backgroundColor: '#00FF00' }} />
+          <View style={{ position: 'absolute', left: 110, top: 110, width: 110, height: 3, backgroundColor: theme.yellow }} />
+          <View style={{ position: 'absolute', left: 217, top: 50, width: 3, height: 63, backgroundColor: theme.green }} />
           <View style={{ position: 'absolute', left: 110, top: 50, width: 130, height: 3, backgroundColor: '#38bdf8', transform: [{ rotate: '-30deg' }] }} />
 
           <View
@@ -509,31 +512,31 @@ export default function TrigonometriaScreen({ navigation }) {
               position: 'absolute',
               left: 18,
               top: 14,
-              backgroundColor: '#141202',
+              backgroundColor: theme.yellowDim,
               borderWidth: 1,
-              borderColor: '#FFD400',
+              borderColor: theme.yellow,
               borderRadius: 4,
               paddingHorizontal: 8,
               paddingVertical: 4
             }}
           >
-            <Text style={{ color: '#FFD400', fontWeight: 'bold', fontSize: 12 }}>
+            <Text style={{ color: theme.yellow, fontWeight: 'bold', fontSize: 12 }}>
               θ = {angulo}°
             </Text>
           </View>
 
-          <Text style={{ position: 'absolute', left: 155, top: 118, color: '#FFD400', fontWeight: 'bold' }}>X</Text>
-          <Text style={{ position: 'absolute', left: 226, top: 78, color: '#00FF00', fontWeight: 'bold' }}>Y</Text>
+          <Text style={{ position: 'absolute', left: 155, top: 118, color: theme.yellow, fontWeight: 'bold' }}>X</Text>
+          <Text style={{ position: 'absolute', left: 226, top: 78, color: theme.green, fontWeight: 'bold' }}>Y</Text>
           <Text style={{ position: 'absolute', left: 160, top: 58, color: '#38bdf8', fontWeight: 'bold' }}>R</Text>
 
-          <Text style={{ position: 'absolute', left: 20, bottom: 12, color: '#888', fontSize: 11 }}>
+          <Text style={{ position: 'absolute', left: 20, bottom: 12, color: theme.muted, fontSize: 11 }}>
             {t('trigonometria.diagramText')}
           </Text>
         </View>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.resultsTitle')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.resultsTitle')}</Text>
 
         {resultados.map((item, index) => {
           const destaque = item.highlight;
@@ -548,23 +551,23 @@ export default function TrigonometriaScreen({ navigation }) {
                   alignItems: 'flex-start',
                   paddingVertical: 8,
                   borderBottomWidth: 1,
-                  borderColor: '#111',
+                  borderColor: theme.divider,
                   gap: 10
                 },
                 destaque && {
-                  backgroundColor: '#1C1A0A',
+                  backgroundColor: theme.yellowDim,
                   borderLeftWidth: 4,
-                  borderLeftColor: '#FFD400',
+                  borderLeftColor: theme.yellow,
                   paddingHorizontal: 6,
                   borderRadius: 4
                 }
               ]}
             >
-              <Text style={[styles.txtWhite, { flex: 1, flexWrap: 'wrap' }]}>
+              <Text style={[s.txtWhite, { flex: 1, flexWrap: 'wrap' }]}>
                 {item.n}
               </Text>
 
-              <Text style={[styles.txtYellow, { width: 135, textAlign: 'right', flexWrap: 'wrap' }]}>
+              <Text style={[s.txtYellow, { width: 135, textAlign: 'right', flexWrap: 'wrap' }]}>
                 {item.v}
               </Text>
             </View>
@@ -572,58 +575,58 @@ export default function TrigonometriaScreen({ navigation }) {
         })}
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.terminalSection')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.terminalSection')}</Text>
 
-        <View style={styles.terminal}>
-          <Text style={styles.txtGcode}>{terminalTrig}</Text>
+        <View style={s.terminal}>
+          <Text style={s.txtGcode}>{terminalTrig}</Text>
         </View>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.dimVerification')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.dimVerification')}</Text>
 
-        <View style={styles.linhaTabela}>
-          <Text style={styles.txtWhite}>{t('trigonometria.checkXY')}</Text>
-          <Text style={styles.txtYellow}>{t('trigonometria.caliperCnc')}</Text>
+        <View style={s.linhaTabela}>
+          <Text style={s.txtWhite}>{t('trigonometria.checkXY')}</Text>
+          <Text style={s.txtYellow}>{t('trigonometria.caliperCnc')}</Text>
         </View>
 
-        <View style={styles.linhaTabela}>
-          <Text style={styles.txtWhite}>{t('trigonometria.checkAngle')}</Text>
-          <Text style={styles.txtYellow}>{t('trigonometria.protractorCnc')}</Text>
+        <View style={s.linhaTabela}>
+          <Text style={s.txtWhite}>{t('trigonometria.checkAngle')}</Text>
+          <Text style={s.txtYellow}>{t('trigonometria.protractorCnc')}</Text>
         </View>
 
-        <View style={styles.linhaTabela}>
-          <Text style={styles.txtWhite}>{t('trigonometria.checkRadius')}</Text>
-          <Text style={styles.txtYellow}>{t('trigonometria.polarCoordinate')}</Text>
+        <View style={s.linhaTabela}>
+          <Text style={s.txtWhite}>{t('trigonometria.checkRadius')}</Text>
+          <Text style={s.txtYellow}>{t('trigonometria.polarCoordinate')}</Text>
         </View>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('trigonometria.fabTips')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('trigonometria.fabTips')}</Text>
 
         {[1, 2, 3, 4, 5].map((item) => (
-          <Text key={item} style={styles.txtWhite}>{t(`trigonometria.tip${item}`)}</Text>
+          <Text key={item} style={s.txtWhite}>{t(`trigonometria.tip${item}`)}</Text>
         ))}
       </View>
 
-      <View style={styles.card}>
+      <View style={s.card}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Text style={styles.cardTitle}>{t('trigonometria.gcodeTitle')}</Text>
+          <Text style={s.cardTitle}>{t('trigonometria.gcodeTitle')}</Text>
 
           <TouchableOpacity
             onPress={() => setGcodeAtivo(!gcodeAtivo)}
             style={{
-              backgroundColor: gcodeAtivo ? '#FFD400' : '#111',
+              backgroundColor: gcodeAtivo ? theme.yellow : theme.inputBg,
               borderWidth: 1,
-              borderColor: gcodeAtivo ? '#FFD400' : '#333',
+              borderColor: gcodeAtivo ? theme.yellow : theme.border,
               paddingHorizontal: 12,
               paddingVertical: 5,
               borderRadius: 4
             }}
           >
             <Text style={{
-              color: gcodeAtivo ? '#000' : '#777',
+              color: gcodeAtivo ? theme.bg : theme.muted,
               fontSize: 10,
               fontWeight: 'bold'
             }}>
@@ -632,7 +635,7 @@ export default function TrigonometriaScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.txtGray}>{t('trigonometria.machineDescription')}</Text>
+        <Text style={s.txtGray}>{t('trigonometria.machineDescription')}</Text>
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {CONTROLES.map((item) => (
@@ -640,14 +643,14 @@ export default function TrigonometriaScreen({ navigation }) {
               key={item}
               onPress={() => setControle(item)}
               style={[
-                styles.btnTipo,
-                controle === item && styles.btnTipoAtivo,
+                s.btnTipo,
+                controle === item && s.btnTipoAtivo,
                 { marginTop: 8 }
               ]}
             >
               <Text style={[
-                styles.btnTipoText,
-                controle === item && styles.btnTipoTextAtivo
+                s.btnTipoText,
+                controle === item && s.btnTipoTextAtivo
               ]}>
                 {item}
               </Text>
@@ -656,8 +659,8 @@ export default function TrigonometriaScreen({ navigation }) {
         </ScrollView>
 
         {gcodeAtivo && (
-          <View style={styles.terminal}>
-            <Text style={styles.txtGcode}>{gcode}</Text>
+          <View style={s.terminal}>
+            <Text style={s.txtGcode}>{gcode}</Text>
           </View>
         )}
       </View>

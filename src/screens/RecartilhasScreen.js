@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 
 import CasillasLayout, {
-  casillasStyles as styles
+  getCasillasStyles
 } from '../components/CasillasLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 const TIPOS = [
   {
@@ -159,6 +160,9 @@ const CONTROLES_CNC = [
 
 export default function RecartilhasScreen({ navigation }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const s = getCasillasStyles(theme);
+  const ls = getLocalStyles(theme);
   const [tipoId, setTipoId] = useState('diamantada_ext');
   const [materialId, setMaterialId] = useState('aco');
 
@@ -510,14 +514,14 @@ function montarGcodeSelecionado() {
   function InputCampo(label, value, setter, placeholder) {
     return (
       <>
-        <Text style={styles.labelInput}>{label}</Text>
+        <Text style={s.labelInput}>{label}</Text>
         <TextInput
-          style={styles.input}
+          style={s.input}
           value={value}
           onChangeText={setter}
           keyboardType="numeric"
           placeholder={placeholder}
-          placeholderTextColor="#555555"
+          placeholderTextColor={theme.mutedLight}
         />
       </>
     );
@@ -525,10 +529,10 @@ function montarGcodeSelecionado() {
 
   function Resultado({ label, value, formula }) {
     return (
-      <View style={localStyles.resultadoBox}>
-        <Text style={localStyles.resultadoLabel}>{label}</Text>
-        <Text style={localStyles.resultadoValue}>{value}</Text>
-        {!!formula && <Text style={localStyles.formula}>{formula}</Text>}
+      <View style={ls.resultadoBox}>
+        <Text style={ls.resultadoLabel}>{label}</Text>
+        <Text style={ls.resultadoValue}>{value}</Text>
+        {!!formula && <Text style={ls.formula}>{formula}</Text>}
       </View>
     );
   }
@@ -542,23 +546,23 @@ function montarGcodeSelecionado() {
       terminalText={terminalText}
       shareText={montarRelatorio()}
     >
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('recartilhas.typeTitle')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('recartilhas.typeTitle')}</Text>
 
-        <View style={localStyles.optionWrap}>
+        <View style={ls.optionWrap}>
           {TIPOS.map((item) => (
             <TouchableOpacity
               key={item.id}
               style={[
-                styles.btnTipo,
-                tipoId === item.id && styles.btnTipoAtivo
+                s.btnTipo,
+                tipoId === item.id && s.btnTipoAtivo
               ]}
               onPress={() => setTipoId(item.id)}
             >
               <Text
                 style={[
-                  styles.btnTipoText,
-                  tipoId === item.id && styles.btnTipoTextAtivo
+                  s.btnTipoText,
+                  tipoId === item.id && s.btnTipoTextAtivo
                 ]}
               >
                 {t(item.nameKey)}
@@ -568,23 +572,23 @@ function montarGcodeSelecionado() {
         </View>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('recartilhas.materialTitle')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('recartilhas.materialTitle')}</Text>
 
-        <View style={localStyles.optionWrap}>
+        <View style={ls.optionWrap}>
           {MATERIAIS.map((item) => (
             <TouchableOpacity
               key={item.id}
               style={[
-                styles.btnTipo,
-                materialId === item.id && styles.btnTipoAtivo
+                s.btnTipo,
+                materialId === item.id && s.btnTipoAtivo
               ]}
               onPress={() => setMaterialId(item.id)}
             >
               <Text
                 style={[
-                  styles.btnTipoText,
-                  materialId === item.id && styles.btnTipoTextAtivo
+                  s.btnTipoText,
+                  materialId === item.id && s.btnTipoTextAtivo
                 ]}
               >
                 {t(item.nameKey)}
@@ -594,8 +598,8 @@ function montarGcodeSelecionado() {
         </View>
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('recartilhas.inputData')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('recartilhas.inputData')}</Text>
 
         {InputCampo(
           t('recartilhas.externalDiameterInput'),
@@ -633,8 +637,8 @@ function montarGcodeSelecionado() {
         )}
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('recartilhas.technicalResults')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('recartilhas.technicalResults')}</Text>
 
         <Resultado
           label={t('recartilhas.baseDiameter')}
@@ -690,47 +694,47 @@ function montarGcodeSelecionado() {
         />
       </View>
 
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('recartilhas.recommendation')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('recartilhas.recommendation')}</Text>
 
-        <Text style={styles.txtWhite}>{t('recartilhas.typeLabel')}: {typeName}</Text>
-        <Text style={styles.txtWhite}>{t('recartilhas.anglePattern')}: {typeAngle}</Text>
-        <Text style={styles.txtWhite}>{t('recartilhas.support')}: {typeSupport}</Text>
-        <Text style={styles.txtWhite}>{t('recartilhas.materialTitle')}: {materialName}</Text>
-        <Text style={styles.txtMuted}>{t('recartilhas.note')}: {materialNote}</Text>
+        <Text style={s.txtWhite}>{t('recartilhas.typeLabel')}: {typeName}</Text>
+        <Text style={s.txtWhite}>{t('recartilhas.anglePattern')}: {typeAngle}</Text>
+        <Text style={s.txtWhite}>{t('recartilhas.support')}: {typeSupport}</Text>
+        <Text style={s.txtWhite}>{t('recartilhas.materialTitle')}: {materialName}</Text>
+        <Text style={s.txtMuted}>{t('recartilhas.note')}: {materialNote}</Text>
       </View>
 
-      <View style={styles.card}>
-        <View style={localStyles.gcodeHeader}>
-          <Text style={styles.cardTitle}>{t('recartilhas.cncControlTitle')}</Text>
+      <View style={s.card}>
+        <View style={ls.gcodeHeader}>
+          <Text style={s.cardTitle}>{t('recartilhas.cncControlTitle')}</Text>
 
           <TouchableOpacity
             style={[
-              localStyles.toggleButton,
-              gcodeAtivo ? localStyles.toggleOn : localStyles.toggleOff
+              ls.toggleButton,
+              gcodeAtivo ? ls.toggleOn : ls.toggleOff
             ]}
             onPress={() => setGcodeAtivo((valor) => !valor)}
           >
-            <Text style={localStyles.toggleText}>
+            <Text style={ls.toggleText}>
               {gcodeAtivo ? t('recartilhas.gcodeOn') : t('recartilhas.gcodeOff')}
             </Text>
           </TouchableOpacity>
         </View>
 
-        <View style={localStyles.optionWrap}>
+        <View style={ls.optionWrap}>
           {CONTROLES_CNC.map((item) => (
   <TouchableOpacity
     key={item.id}
     style={[
-      styles.btnTipo,
-      controleCnc === item.id && styles.btnTipoAtivo
+      s.btnTipo,
+      controleCnc === item.id && s.btnTipoAtivo
     ]}
     onPress={() => setControleCnc(item.id)}
   >
     <Text
       style={[
-        styles.btnTipoText,
-        controleCnc === item.id && styles.btnTipoTextAtivo
+        s.btnTipoText,
+        controleCnc === item.id && s.btnTipoTextAtivo
       ]}
     >
       {item.nome}
@@ -739,105 +743,107 @@ function montarGcodeSelecionado() {
 ))}
         </View>
 
-        <View style={[styles.terminal, { marginTop: 10 }]}>
-          <Text style={styles.txtGcode}>{montarGcodeSelecionado()}</Text>
+        <View style={[s.terminal, { marginTop: 10 }]}>
+          <Text style={s.txtGcode}>{montarGcodeSelecionado()}</Text>
         </View>
       </View>
 
-      <View style={localStyles.warn}>
-        <Text style={localStyles.warnTitle}>{t('recartilhas.safetyTitle')}</Text>
-        <Text style={localStyles.warnText}>{t('recartilhas.safetyText')}</Text>
+      <View style={ls.warn}>
+        <Text style={ls.warnTitle}>{t('recartilhas.safetyTitle')}</Text>
+        <Text style={ls.warnText}>{t('recartilhas.safetyText')}</Text>
       </View>
     </CasillasLayout>
   );
 }
 
-const localStyles = StyleSheet.create({
-  optionWrap: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6
-  },
+function getLocalStyles(theme) {
+  return StyleSheet.create({
+    optionWrap: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 6
+    },
 
-  resultadoBox: {
-    backgroundColor: '#060606',
-    borderWidth: 1,
-    borderColor: '#1A1A1A',
-    borderRadius: 6,
-    padding: 9,
-    marginBottom: 7
-  },
+    resultadoBox: {
+      backgroundColor: theme.card,
+      borderWidth: 1,
+      borderColor: theme.border,
+      borderRadius: 6,
+      padding: 9,
+      marginBottom: 7
+    },
 
-  resultadoLabel: {
-    color: '#888888',
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginBottom: 3
-  },
+    resultadoLabel: {
+      color: theme.muted,
+      fontSize: 10,
+      fontWeight: 'bold',
+      marginBottom: 3
+    },
 
-  resultadoValue: {
-    color: '#00FF7F',
-    fontSize: 14,
-    fontWeight: '900'
-  },
+    resultadoValue: {
+      color: theme.green,
+      fontSize: 14,
+      fontWeight: '900'
+    },
 
-  formula: {
-    color: '#888888',
-    fontSize: 10,
-    marginTop: 3,
-    lineHeight: 15
-  },
+    formula: {
+      color: theme.muted,
+      fontSize: 10,
+      marginTop: 3,
+      lineHeight: 15
+    },
 
-  gcodeHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-    gap: 8
-  },
+    gcodeHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginBottom: 10,
+      gap: 8
+    },
 
-  toggleButton: {
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    borderWidth: 1
-  },
+    toggleButton: {
+      paddingVertical: 7,
+      paddingHorizontal: 10,
+      borderRadius: 5,
+      borderWidth: 1
+    },
 
-  toggleOn: {
-    backgroundColor: '#071007',
-    borderColor: '#00FF7F'
-  },
+    toggleOn: {
+      backgroundColor: theme.green + '11',
+      borderColor: theme.green
+    },
 
-  toggleOff: {
-    backgroundColor: '#160000',
-    borderColor: '#FF4D4D'
-  },
+    toggleOff: {
+      backgroundColor: theme.red + '11',
+      borderColor: theme.red
+    },
 
-  toggleText: {
-    color: '#FFD400',
-    fontSize: 10,
-    fontWeight: '900'
-  },
+    toggleText: {
+      color: theme.yellow,
+      fontSize: 10,
+      fontWeight: '900'
+    },
 
-  warn: {
-    backgroundColor: '#120F00',
-    borderWidth: 1,
-    borderColor: '#4D4100',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10
-  },
+    warn: {
+      backgroundColor: theme.yellowDim,
+      borderWidth: 1,
+      borderColor: theme.yellow,
+      borderRadius: 8,
+      padding: 12,
+      marginBottom: 10
+    },
 
-  warnTitle: {
-    color: '#FFD400',
-    fontSize: 12,
-    fontWeight: '900',
-    marginBottom: 4
-  },
+    warnTitle: {
+      color: theme.yellow,
+      fontSize: 12,
+      fontWeight: '900',
+      marginBottom: 4
+    },
 
-  warnText: {
-    color: '#D6C77A',
-    fontSize: 11,
-    lineHeight: 16
-  }
-});
+    warnText: {
+      color: theme.textSecondary,
+      fontSize: 11,
+      lineHeight: 16
+    }
+  });
+}

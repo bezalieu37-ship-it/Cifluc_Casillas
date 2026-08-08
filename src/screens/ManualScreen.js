@@ -13,16 +13,186 @@ import {
 } from 'react-native';
 
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
-const C = {
-  bg: '#000000',
-  card: '#0A0A0A',
-  border: '#242424',
-  yellow: '#FFD400',
-  green: '#00FF7F',
-  text: '#D8D8D8',
-  muted: '#8C8C8C'
-};
+function getStyles(theme) {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.bg
+    },
+
+    header: {
+      paddingTop: 48,
+      paddingHorizontal: 14,
+      paddingBottom: 12,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.border
+    },
+
+    title: {
+      color: theme.yellow,
+      fontSize: 21,
+      fontWeight: '900',
+      textAlign: 'center'
+    },
+
+    sub: {
+      color: theme.muted,
+      fontSize: 11,
+      textAlign: 'center',
+      marginTop: 4,
+      fontWeight: 'bold'
+    },
+
+    content: {
+      flex: 1,
+      padding: 10
+    },
+
+    introCard: {
+      backgroundColor: theme.green + '11',
+      borderWidth: 1,
+      borderColor: theme.green + '44',
+      borderRadius: 8,
+      padding: 12,
+      marginBottom: 10
+    },
+
+    introTitle: {
+      color: theme.green,
+      fontSize: 14,
+      fontWeight: '900',
+      marginBottom: 6
+    },
+
+    introText: {
+      color: theme.textSecondary,
+      fontSize: 12,
+      lineHeight: 18
+    },
+
+    card: {
+      backgroundColor: theme.card,
+      borderWidth: 1,
+      borderColor: theme.cardBorder,
+      borderRadius: 8,
+      padding: 12,
+      marginBottom: 10
+    },
+
+    cardTitle: {
+      color: theme.yellow,
+      fontSize: 14,
+      fontWeight: '900',
+      marginBottom: 7
+    },
+
+    text: {
+      color: theme.textSecondary,
+      fontSize: 12,
+      lineHeight: 18
+    },
+
+    warn: {
+      backgroundColor: theme.yellowDim,
+      borderWidth: 1,
+      borderColor: theme.yellow,
+      borderRadius: 8,
+      padding: 12,
+      marginBottom: 10
+    },
+
+    warnTitle: {
+      color: theme.yellow,
+      fontSize: 13,
+      fontWeight: '900',
+      marginBottom: 5
+    },
+
+    warnText: {
+      color: theme.textSecondary,
+      fontSize: 12,
+      lineHeight: 18
+    },
+
+    bottom: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      right: 0,
+      backgroundColor: theme.bottomBarBg,
+      borderTopWidth: 1,
+      borderTopColor: theme.border,
+      paddingHorizontal: 8,
+      paddingTop: 8,
+      paddingBottom: 10,
+      flexDirection: 'row',
+      gap: 6
+    },
+
+    bottomButton: {
+      flex: 1,
+      backgroundColor: theme.inputBg,
+      borderWidth: 1,
+      borderColor: theme.border,
+      borderRadius: 6,
+      paddingVertical: 10,
+      alignItems: 'center'
+    },
+
+    bottomText: {
+      color: theme.yellow,
+      fontSize: 11,
+      fontWeight: 'bold'
+    },
+
+    modalFundo: {
+      flex: 1,
+      backgroundColor: theme.modalBg,
+      justifyContent: 'center',
+      padding: 14
+    },
+
+    modalBox: {
+      maxHeight: '86%',
+      backgroundColor: theme.modalContent,
+      borderWidth: 1,
+      borderColor: theme.cardBorder,
+      borderRadius: 10,
+      padding: 14
+    },
+
+    modalTitle: {
+      color: theme.yellow,
+      fontSize: 16,
+      fontWeight: '900',
+      marginBottom: 10,
+      textAlign: 'center'
+    },
+
+    modalText: {
+      color: theme.textSecondary,
+      fontSize: 12,
+      lineHeight: 18
+    },
+
+    modalButton: {
+      backgroundColor: theme.inputBg,
+      borderWidth: 1,
+      borderColor: theme.yellow,
+      borderRadius: 7,
+      paddingVertical: 10,
+      marginTop: 12,
+      alignItems: 'center'
+    },
+
+    modalButtonText: {
+      color: theme.yellow,
+      fontWeight: '900'
+    }
+  });
+}
 
 const SECTION_SPECS = [
   ['manual.quick1Title', 'manual.section1_1Body'],
@@ -49,6 +219,8 @@ const SECTION_SPECS = [
 
 export default function ManualScreen({ navigation }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const styles = getStyles(theme);
   const [modal, setModal] = useState(false);
 
   const sections = SECTION_SPECS.map(([titleKey, bodyKey]) => ({
@@ -98,7 +270,7 @@ export default function ManualScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000000" />
+      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
 
       <View style={styles.header}>
         <Text style={styles.title}>{t('manual.title')}</Text>
@@ -173,180 +345,3 @@ export default function ManualScreen({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: C.bg
-  },
-
-  header: {
-    paddingTop: 48,
-    paddingHorizontal: 14,
-    paddingBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: C.border
-  },
-
-  title: {
-    color: C.yellow,
-    fontSize: 21,
-    fontWeight: '900',
-    textAlign: 'center'
-  },
-
-  sub: {
-    color: C.muted,
-    fontSize: 11,
-    textAlign: 'center',
-    marginTop: 4,
-    fontWeight: 'bold'
-  },
-
-  content: {
-    flex: 1,
-    padding: 10
-  },
-
-  introCard: {
-    backgroundColor: '#071007',
-    borderWidth: 1,
-    borderColor: '#184A18',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10
-  },
-
-  introTitle: {
-    color: C.green,
-    fontSize: 14,
-    fontWeight: '900',
-    marginBottom: 6
-  },
-
-  introText: {
-    color: '#BFECCB',
-    fontSize: 12,
-    lineHeight: 18
-  },
-
-  card: {
-    backgroundColor: C.card,
-    borderWidth: 1,
-    borderColor: C.border,
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10
-  },
-
-  cardTitle: {
-    color: C.yellow,
-    fontSize: 14,
-    fontWeight: '900',
-    marginBottom: 7
-  },
-
-  text: {
-    color: C.text,
-    fontSize: 12,
-    lineHeight: 18
-  },
-
-  warn: {
-    backgroundColor: '#120F00',
-    borderWidth: 1,
-    borderColor: '#4D4100',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10
-  },
-
-  warnTitle: {
-    color: C.yellow,
-    fontSize: 13,
-    fontWeight: '900',
-    marginBottom: 5
-  },
-
-  warnText: {
-    color: '#D6C77A',
-    fontSize: 12,
-    lineHeight: 18
-  },
-
-  bottom: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: C.bg,
-    borderTopWidth: 1,
-    borderTopColor: '#333333',
-    paddingHorizontal: 8,
-    paddingTop: 8,
-    paddingBottom: 10,
-    flexDirection: 'row',
-    gap: 6
-  },
-
-  bottomButton: {
-    flex: 1,
-    backgroundColor: '#111111',
-    borderWidth: 1,
-    borderColor: '#333333',
-    borderRadius: 6,
-    paddingVertical: 10,
-    alignItems: 'center'
-  },
-
-  bottomText: {
-    color: C.yellow,
-    fontSize: 11,
-    fontWeight: 'bold'
-  },
-
-  modalFundo: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,.88)',
-    justifyContent: 'center',
-    padding: 14
-  },
-
-  modalBox: {
-    maxHeight: '86%',
-    backgroundColor: '#080808',
-    borderWidth: 1,
-    borderColor: C.border,
-    borderRadius: 10,
-    padding: 14
-  },
-
-  modalTitle: {
-    color: C.yellow,
-    fontSize: 16,
-    fontWeight: '900',
-    marginBottom: 10,
-    textAlign: 'center'
-  },
-
-  modalText: {
-    color: C.text,
-    fontSize: 12,
-    lineHeight: 18
-  },
-
-  modalButton: {
-    backgroundColor: '#111111',
-    borderWidth: 1,
-    borderColor: C.yellow,
-    borderRadius: 7,
-    paddingVertical: 10,
-    marginTop: 12,
-    alignItems: 'center'
-  },
-
-  modalButtonText: {
-    color: C.yellow,
-    fontWeight: '900'
-  }
-});

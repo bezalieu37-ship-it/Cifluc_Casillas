@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 
 import CasillasLayout, {
-  casillasStyles as styles
+  getCasillasStyles
 } from '../components/CasillasLayout';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 const ABAS = [
   { id: 'Medidas', labelKey: 'conversoes.tabMeasures' },
@@ -24,6 +25,9 @@ const ABAS = [
 
 export default function ConversoesScreen({ navigation }) {
   const { t } = useLanguage();
+  const { theme } = useTheme();
+  const s = getCasillasStyles(theme);
+  const ls = getLocalStyles(theme);
   const [aba, setAba] = useState('Medidas');
   const activeTabLabel = t(ABAS.find((item) => item.id === aba)?.labelKey || 'conversoes.tabMeasures');
 
@@ -265,14 +269,14 @@ export default function ConversoesScreen({ navigation }) {
   function InputCampo(label, value, setter, placeholder) {
     return (
       <>
-        <Text style={styles.labelInput}>{label}</Text>
+        <Text style={s.labelInput}>{label}</Text>
         <TextInput
-          style={styles.input}
+          style={s.input}
           value={value}
           onChangeText={setter}
           keyboardType="numeric"
           placeholder={placeholder}
-          placeholderTextColor="#555555"
+          placeholderTextColor={theme.mutedLight}
         />
       </>
     );
@@ -280,10 +284,10 @@ export default function ConversoesScreen({ navigation }) {
 
   function Resultado({ label, value, formula }) {
     return (
-      <View style={localStyles.resultadoBox}>
-        <Text style={localStyles.resultadoLabel}>{label}</Text>
-        <Text style={localStyles.resultadoValue}>{value}</Text>
-        {!!formula && <Text style={localStyles.formula}>{formula}</Text>}
+      <View style={ls.resultadoBox}>
+        <Text style={ls.resultadoLabel}>{label}</Text>
+        <Text style={ls.resultadoValue}>{value}</Text>
+        {!!formula && <Text style={ls.formula}>{formula}</Text>}
       </View>
     );
   }
@@ -291,8 +295,8 @@ export default function ConversoesScreen({ navigation }) {
   function renderMedidas() {
     return (
       <>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.mmInch')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.mmInch')}</Text>
 
           {InputCampo(t('conversoes.valueInMm'), mm, setMm, 'Ex: 25.4')}
 
@@ -311,8 +315,8 @@ export default function ConversoesScreen({ navigation }) {
           />
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.meterMm')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.meterMm')}</Text>
 
           {InputCampo(t('conversoes.valueInMeters'), metro, setMetro, 'Ex: 1')}
 
@@ -331,8 +335,8 @@ export default function ConversoesScreen({ navigation }) {
           />
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.degreesRadians')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.degreesRadians')}</Text>
 
           {InputCampo(t('conversoes.valueInDegrees'), graus, setGraus, 'Ex: 180')}
 
@@ -357,8 +361,8 @@ export default function ConversoesScreen({ navigation }) {
   function renderUsinagem() {
     return (
       <>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.rpmCuttingSpeed')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.rpmCuttingSpeed')}</Text>
 
           {InputCampo(t('conversoes.toolDiameter'), diametro, setDiametro, 'Ex: 20')}
 
@@ -379,8 +383,8 @@ export default function ConversoesScreen({ navigation }) {
           />
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.tableFeed')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.tableFeed')}</Text>
 
           {InputCampo(t('conversoes.feedPerTooth'), fz, setFz, 'Ex: 0.08')}
 
@@ -400,8 +404,8 @@ export default function ConversoesScreen({ navigation }) {
 
   function renderRoscas() {
     return (
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('conversoes.tpiPitch')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('conversoes.tpiPitch')}</Text>
 
         {InputCampo(t('conversoes.tpiLabel'), tpi, setTpi, 'Ex: 20')}
 
@@ -425,8 +429,8 @@ export default function ConversoesScreen({ navigation }) {
   function renderForcaPressao() {
     return (
       <>
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.force')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.force')}</Text>
 
           {InputCampo(t('conversoes.kgfLabel'), kgf, setKgf, 'Ex: 100')}
 
@@ -445,8 +449,8 @@ export default function ConversoesScreen({ navigation }) {
           />
         </View>
 
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('conversoes.pressure')}</Text>
+        <View style={s.card}>
+          <Text style={s.cardTitle}>{t('conversoes.pressure')}</Text>
 
           {InputCampo('bar', bar, setBar, 'Ex: 1')}
 
@@ -470,8 +474,8 @@ export default function ConversoesScreen({ navigation }) {
 
   function renderTemperatura() {
     return (
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('conversoes.temperature')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('conversoes.temperature')}</Text>
 
         {InputCampo(t('conversoes.celsiusLabel'), celsius, setCelsius, 'Ex: 25')}
 
@@ -494,8 +498,8 @@ export default function ConversoesScreen({ navigation }) {
 
   function renderMassaVolume() {
     return (
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('conversoes.massVolumeDensity')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('conversoes.massVolumeDensity')}</Text>
 
         {InputCampo(t('conversoes.massLabel'), massa, setMassa, 'Ex: 7.85')}
 
@@ -538,23 +542,23 @@ export default function ConversoesScreen({ navigation }) {
       terminalText={terminalText}
       shareText={montarRelatorio()}
     >
-      <View style={styles.card}>
-        <Text style={styles.cardTitle}>{t('conversoes.conversionCategories')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('conversoes.conversionCategories')}</Text>
 
-        <View style={localStyles.optionWrap}>
+        <View style={ls.optionWrap}>
           {ABAS.map((item) => (
             <TouchableOpacity
               key={item.id}
               style={[
-                styles.btnTipo,
-                aba === item.id && styles.btnTipoAtivo
+                s.btnTipo,
+                aba === item.id && s.btnTipoAtivo
               ]}
               onPress={() => setAba(item.id)}
             >
               <Text
                 style={[
-                  styles.btnTipoText,
-                  aba === item.id && styles.btnTipoTextAtivo
+                  s.btnTipoText,
+                  aba === item.id && s.btnTipoTextAtivo
                 ]}
               >
                 {t(item.labelKey)}
@@ -566,69 +570,71 @@ export default function ConversoesScreen({ navigation }) {
 
       {renderConteudo()}
 
-      <View style={localStyles.warn}>
-        <Text style={localStyles.warnTitle}>{t('conversoes.technicalWarning')}</Text>
-        <Text style={localStyles.warnText}>{t('conversoes.warningText')}</Text>
+      <View style={ls.warn}>
+        <Text style={ls.warnTitle}>{t('conversoes.technicalWarning')}</Text>
+        <Text style={ls.warnText}>{t('conversoes.warningText')}</Text>
       </View>
     </CasillasLayout>
   );
 }
 
-const localStyles = StyleSheet.create({
-  optionWrap: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6
-  },
+function getLocalStyles(theme) {
+  return StyleSheet.create({
+    optionWrap: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 6
+    },
 
-  resultadoBox: {
-    backgroundColor: '#060606',
-    borderWidth: 1,
-    borderColor: '#1A1A1A',
-    borderRadius: 6,
-    padding: 9,
-    marginBottom: 7
-  },
+    resultadoBox: {
+      backgroundColor: theme.card,
+      borderWidth: 1,
+      borderColor: theme.border,
+      borderRadius: 6,
+      padding: 9,
+      marginBottom: 7
+    },
 
-  resultadoLabel: {
-    color: '#888888',
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginBottom: 3
-  },
+    resultadoLabel: {
+      color: theme.muted,
+      fontSize: 10,
+      fontWeight: 'bold',
+      marginBottom: 3
+    },
 
-  resultadoValue: {
-    color: '#00FF7F',
-    fontSize: 14,
-    fontWeight: '900'
-  },
+    resultadoValue: {
+      color: theme.green,
+      fontSize: 14,
+      fontWeight: '900'
+    },
 
-  formula: {
-    color: '#888888',
-    fontSize: 10,
-    marginTop: 3,
-    lineHeight: 15
-  },
+    formula: {
+      color: theme.muted,
+      fontSize: 10,
+      marginTop: 3,
+      lineHeight: 15
+    },
 
-  warn: {
-    backgroundColor: '#120F00',
-    borderWidth: 1,
-    borderColor: '#4D4100',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 10
-  },
+    warn: {
+      backgroundColor: theme.yellowDim,
+      borderWidth: 1,
+      borderColor: theme.yellow,
+      borderRadius: 8,
+      padding: 12,
+      marginBottom: 10
+    },
 
-  warnTitle: {
-    color: '#FFD400',
-    fontSize: 12,
-    fontWeight: '900',
-    marginBottom: 4
-  },
+    warnTitle: {
+      color: theme.yellow,
+      fontSize: 12,
+      fontWeight: '900',
+      marginBottom: 4
+    },
 
-  warnText: {
-    color: '#D6C77A',
-    fontSize: 11,
-    lineHeight: 16
-  }
-});
+    warnText: {
+      color: theme.textSecondary,
+      fontSize: 11,
+      lineHeight: 16
+    }
+  });
+}

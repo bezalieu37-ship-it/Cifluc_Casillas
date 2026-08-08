@@ -36,7 +36,6 @@ export async function listarHistorico() {
 
     return lista;
   } catch (error) {
-    console.log('Erro ao listar histórico:', error);
     return [];
   }
 }
@@ -66,8 +65,6 @@ export async function salvarHistorico(item) {
       lista: novaLista
     };
   } catch (error) {
-    console.log('Erro ao salvar histórico:', error);
-
     return {
       ok: false,
       item: null,
@@ -85,7 +82,6 @@ export async function buscarItemHistorico(id) {
 
     return item || null;
   } catch (error) {
-    console.log('Erro ao buscar item do histórico:', error);
     return null;
   }
 }
@@ -103,8 +99,6 @@ export async function removerItemHistorico(id) {
       lista: novaLista
     };
   } catch (error) {
-    console.log('Erro ao remover item do histórico:', error);
-
     return {
       ok: false,
       lista: [],
@@ -122,8 +116,6 @@ export async function limparHistorico() {
       lista: []
     };
   } catch (error) {
-    console.log('Erro ao limpar histórico:', error);
-
     return {
       ok: false,
       lista: [],
@@ -138,7 +130,6 @@ export async function contarHistorico() {
 
     return lista.length;
   } catch (error) {
-    console.log('Erro ao contar histórico:', error);
     return 0;
   }
 }
@@ -169,7 +160,6 @@ export async function exportarHistoricoTexto() {
       `${texto}`
     );
   } catch (error) {
-    console.log('Erro ao exportar histórico:', error);
     return 'ERRO AO EXPORTAR HISTÓRICO';
   }
 }

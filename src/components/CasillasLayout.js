@@ -15,6 +15,7 @@ import {
 
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { salvarHistorico } from '../services/historicoService';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -74,6 +75,7 @@ export default function CasillasLayout({
 }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
   const [modalVisivel, setModalVisivel] = useState(false);
   const terminalAnterior = useRef('');
 
@@ -447,7 +449,7 @@ export default function CasillasLayout({
         </View>
       </ScrollView>
 
-      <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, flexDirection: 'row', backgroundColor: theme.bottomBarBg, borderTopWidth: 1, borderTopColor: theme.borderLight, paddingHorizontal: 5, paddingTop: 6, paddingBottom: 8 }}>
+      <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, flexDirection: 'row', backgroundColor: theme.bottomBarBg, borderTopWidth: 1, borderTopColor: theme.borderLight, paddingHorizontal: 5, paddingTop: 6, paddingBottom: Math.max(insets.bottom, 8) }}>
         <TouchableOpacity
           style={{ flex: 1, backgroundColor: theme.inputBg, borderWidth: 1, borderColor: theme.inputBorder, borderRadius: 6, paddingVertical: 8, marginHorizontal: 3, alignItems: 'center', justifyContent: 'center' }}
           onPress={() => navigation.navigate('Dashboard')}
