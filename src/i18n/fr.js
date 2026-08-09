@@ -762,7 +762,7 @@ const fr = {
     description: 'Description',
     tool: 'Outil',
     feed: 'Avance',
-    groupAll: 'Tous', groupSteel: 'Acier', groupStainless: 'Inox', groupIron: 'Fonte', groupAluminum: 'Aluminium', groupCopperBronze: 'Cuivre/Bronze', groupPolymer: 'Polymère', groupSpecial: 'Spécial', reportTitle: 'BASE TECHNIQUE DES MATÉRIAUX', filter: 'Filtre', displayedCount: 'Matériaux affichés', group: 'Groupe', approxHardness: 'Dureté approximative', vcCarbide: 'Vc carbure', cooling: 'Lubrification', application: 'Application', notes: 'Remarques', warning: "Avertissement : valeurs indicatives. Consultez le catalogue du fabricant de l'outil et les conditions réelles de la machine.", layoutSubtitle: 'Vc • outil • avance • application • remarques'
+    groupAll: 'Tous', groupSteel: 'Acier', groupStainless: 'Inox', groupIron: 'Fonte', groupAluminum: 'Aluminium', groupCopperBronze: 'Cuivre/Bronze', groupPolymer: 'Polymère', groupSpecial: 'Spécial', groupOthers: 'Autres', reportTitle: 'BASE TECHNIQUE DES MATÉRIAUX', filter: 'Filtre', displayedCount: 'Matériaux affichés', group: 'Groupe', approxHardness: 'Dureté approximative', vcCarbide: 'Vc carbure', cooling: 'Lubrification', application: 'Application', notes: 'Remarques', warning: "Avertissement : valeurs indicatives. Consultez le catalogue du fabricant de l'outil et les conditions réelles de la machine.", layoutSubtitle: 'Vc • outil • avance • application • remarques'
   },
   materiaisDb: {
     sae1020: { nome: 'Acier SAE 1020', grupo: 'Acier à bas carbone', ferramenta: 'HSS affûté ou carbure P25/P35', refrigeracao: 'Recommandée', aplicacao: 'Arbres légers, bagues, bases et supports', obs: 'Bonne usinabilité. Idéal pour pièces générales et formation.' },

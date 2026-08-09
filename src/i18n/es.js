@@ -762,7 +762,7 @@ const es = {
     description: 'Descripción',
     tool: 'Herramienta',
     feed: 'Avance',
-    groupAll: 'Todos', groupSteel: 'Acero', groupStainless: 'Inoxidable', groupIron: 'Hierro', groupAluminum: 'Aluminio', groupCopperBronze: 'Cobre/Bronce', groupPolymer: 'Polímero', groupSpecial: 'Especial', reportTitle: 'BASE TÉCNICA DE MATERIALES', filter: 'Filtro', displayedCount: 'Materiales mostrados', group: 'Grupo', approxHardness: 'Dureza aproximada', vcCarbide: 'Vc metal duro', cooling: 'Refrigeración', application: 'Aplicación', notes: 'Observaciones', warning: 'Aviso: valores auxiliares. Consulte el catálogo del fabricante de la herramienta y las condiciones reales de la máquina.', layoutSubtitle: 'Vc • herramienta • avance • aplicación • observaciones'
+    groupAll: 'Todos', groupSteel: 'Acero', groupStainless: 'Inoxidable', groupIron: 'Hierro', groupAluminum: 'Aluminio', groupCopperBronze: 'Cobre/Bronce', groupPolymer: 'Polímero', groupSpecial: 'Especial', groupOthers: 'Otros', reportTitle: 'BASE TÉCNICA DE MATERIALES', filter: 'Filtro', displayedCount: 'Materiales mostrados', group: 'Grupo', approxHardness: 'Dureza aproximada', vcCarbide: 'Vc metal duro', cooling: 'Refrigeración', application: 'Aplicación', notes: 'Observaciones', warning: 'Aviso: valores auxiliares. Consulte el catálogo del fabricante de la herramienta y las condiciones reales de la máquina.', layoutSubtitle: 'Vc • herramienta • avance • aplicación • observaciones'
   },
   materiaisDb: {
     sae1020: { nome: 'Acero SAE 1020', grupo: 'Acero de bajo carbono', ferramenta: 'HSS afilado o metal duro P25/P35', refrigeracao: 'Recomendado', aplicacao: 'Ejes ligeros, casquillos, bases y soportes', obs: 'Buena maquinabilidad. Ideal para piezas generales y formación.' },

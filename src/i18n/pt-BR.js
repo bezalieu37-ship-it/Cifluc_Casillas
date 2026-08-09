@@ -768,7 +768,7 @@ const ptBR = {
     description: 'Descrição',
     tool: 'Ferramenta',
     feed: 'Avanço',
-    groupAll: 'Todos', groupSteel: 'Aço', groupStainless: 'Inox', groupIron: 'Ferro', groupAluminum: 'Alumínio', groupCopperBronze: 'Cobre/Bronze', groupPolymer: 'Polímero', groupSpecial: 'Especial', reportTitle: 'BANCO TÉCNICO DE MATERIAIS', filter: 'Filtro', displayedCount: 'Materiais exibidos', group: 'Grupo', approxHardness: 'Dureza aproximada', vcCarbide: 'Vc metal duro', cooling: 'Refrigeração', application: 'Aplicação', notes: 'Observações', warning: 'Aviso: valores auxiliares. Consulte o catálogo do fabricante da ferramenta e as condições reais da máquina.', layoutSubtitle: 'Vc • ferramenta • avanço • aplicação • observações'
+    groupAll: 'Todos', groupSteel: 'Aço', groupStainless: 'Inox', groupIron: 'Ferro', groupAluminum: 'Alumínio', groupCopperBronze: 'Cobre/Bronze', groupPolymer: 'Polímero', groupSpecial: 'Especial', groupOthers: 'Outros', reportTitle: 'BANCO TÉCNICO DE MATERIAIS', filter: 'Filtro', displayedCount: 'Materiais exibidos', group: 'Grupo', approxHardness: 'Dureza aproximada', vcCarbide: 'Vc metal duro', cooling: 'Refrigeração', application: 'Aplicação', notes: 'Observações', warning: 'Aviso: valores auxiliares. Consulte o catálogo do fabricante da ferramenta e as condições reais da máquina.', layoutSubtitle: 'Vc • ferramenta • avanço • aplicação • observações'
   },
   materiaisDb: {
     sae1020: { nome: 'Aço SAE 1020', grupo: 'Aço carbono baixo carbono', ferramenta: 'HSS afiado ou metal duro P25/P35', refrigeracao: 'Recomendado', aplicacao: 'Eixos leves, buchas, bases e suportes', obs: 'Boa usinabilidade. Ideal para peças gerais e treinamento.' },

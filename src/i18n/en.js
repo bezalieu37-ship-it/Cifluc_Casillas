@@ -762,7 +762,7 @@ const en = {
     description: 'Description',
     tool: 'Tool',
     feed: 'Feed',
-    groupAll: 'All', groupSteel: 'Steel', groupStainless: 'Stainless', groupIron: 'Iron', groupAluminum: 'Aluminum', groupCopperBronze: 'Copper/Bronze', groupPolymer: 'Polymer', groupSpecial: 'Special', reportTitle: 'TECHNICAL MATERIALS DATABASE', filter: 'Filter', displayedCount: 'Materials displayed', group: 'Group', approxHardness: 'Approximate hardness', vcCarbide: 'Carbide Vc', cooling: 'Coolant', application: 'Application', notes: 'Notes', warning: 'Warning: values are for reference. Consult the tool manufacturer catalog and actual machine conditions.', layoutSubtitle: 'Vc • tool • feed • application • notes'
+    groupAll: 'All', groupSteel: 'Steel', groupStainless: 'Stainless', groupIron: 'Iron', groupAluminum: 'Aluminum', groupCopperBronze: 'Copper/Bronze', groupPolymer: 'Polymer', groupSpecial: 'Special', groupOthers: 'Others', reportTitle: 'TECHNICAL MATERIALS DATABASE', filter: 'Filter', displayedCount: 'Materials displayed', group: 'Group', approxHardness: 'Approximate hardness', vcCarbide: 'Carbide Vc', cooling: 'Coolant', application: 'Application', notes: 'Notes', warning: 'Warning: values are for reference. Consult the tool manufacturer catalog and actual machine conditions.', layoutSubtitle: 'Vc • tool • feed • application • notes'
   },
   materiaisDb: {
     sae1020: { nome: 'SAE 1020 Steel', grupo: 'Low-carbon steel', ferramenta: 'Sharp HSS or P25/P35 carbide', refrigeracao: 'Recommended', aplicacao: 'Light shafts, bushings, bases and supports', obs: 'Good machinability. Ideal for general parts and training.' },
