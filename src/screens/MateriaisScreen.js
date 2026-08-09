@@ -5,29 +5,14 @@ import {
   Text,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
-  StatusBar,
-  Modal,
-  Share,
-  Alert
+  TouchableOpacity
 } from 'react-native';
 
 import CasillasLayout, {
-  casillasStyles as styles,
   getCasillasStyles
 } from '../components/CasillasLayout';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
-
-const C = {
-  bg: '#000000',
-  card: '#0A0A0A',
-  border: '#242424',
-  yellow: '#FFD400',
-  green: '#00FF7F',
-  text: '#D8D8D8',
-  muted: '#8C8C8C'
-};
 
 const GRUPOS = [
   'Todos',
@@ -288,9 +273,9 @@ export default function MateriaisScreen({ navigation }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
   const s = getCasillasStyles(theme);
+  const ls = getLocalStyles(theme);
 
   const [grupo, setGrupo] = useState('Todos');
-  const [modal, setModal] = useState(false);
 
   function localizeMaterial(item, field) {
     const key = `materiaisDb.${item.id}.${field}`;
@@ -360,153 +345,117 @@ export default function MateriaisScreen({ navigation }) {
       );
     });
 
-    linhas.push(
-      t('materiais.warning')
-    );
+    linhas.push(t('materiais.warning'));
 
     return linhas.join('\n');
   }
 
-  async function compartilhar() {
-    try {
-      await Share.share({ message: montarRelatorio() });
-    } catch (error) {
-      Alert.alert(t('common.error'), t('common.error'));
-    }
-  }
-
-  function MaterialCard({ item }) {
-    return (
-      <View style={s.card}>
-        <Text style={s.cardTitle}>{localizeMaterial(item, 'nome')}</Text>
-
-        <View style={s.gridInputs}>
-          <View style={s.boxInputHalf}>
-            <Text style={s.txtGray}>{t('materiais.categoryCol')}</Text>
-            <Text style={s.txtWhite}>{localizeMaterial(item, 'grupo')}</Text>
-          </View>
-
-          <View style={s.boxInputHalf}>
-            <Text style={s.txtGray}>{t('materiais.hardnessCol')}</Text>
-            <Text style={s.txtWhite}>{item.dureza}</Text>
-          </View>
-        </View>
-
-        <View style={s.gridInputs}>
-          <View style={s.boxInputHalf}>
-            <Text style={s.txtGray}>Vc HSS</Text>
-            <Text style={s.txtYellow}>{item.hss} m/min</Text>
-          </View>
-
-          <View style={s.boxInputHalf}>
-            <Text style={s.txtGray}>{t('materiais.vcCarbide')}</Text>
-            <Text style={s.txtYellow}>{item.md} m/min</Text>
-          </View>
-        </View>
-
-        <Text style={s.txtGray}>{t('materiais.feed')}</Text>
-        <Text style={s.txtWhite}>{item.avanco}</Text>
-
-        <Text style={s.txtGray}>{t('materiais.tool')}</Text>
-        <Text style={s.txtWhite}>{localizeMaterial(item, 'ferramenta')}</Text>
-
-        <Text style={s.txtGray}>{t('materiais.cooling')}</Text>
-        <Text style={s.txtWhite}>{localizeMaterial(item, 'refrigeracao')}</Text>
-
-        <Text style={s.txtGray}>{t('materiais.application')}</Text>
-        <Text style={s.txtWhite}>{localizeMaterial(item, 'aplicacao')}</Text>
-
-        <Text style={s.txtGray}>{t('materiais.notes')}</Text>
-        <Text style={s.txtMuted}>{localizeMaterial(item, 'obs')}</Text>
-      </View>
-    );
-  }
+  const terminalText = [
+    `${t('materiais.filter')}: ${t(GROUP_KEYS[grupo])}`,
+    `${t('materiais.displayedCount')}: ${lista.length}`,
+    ...lista.slice(0, 5).map((m) => `${m.nome}: Vc HSS ${m.hss}, MD ${m.md}`),
+    lista.length > 5 ? `... +${lista.length - 5} ${t('materiais.displayedCount').toLowerCase()}` : '',
+    `${t('materiais.warning')}`
+  ].filter(Boolean).join('\n');
 
   return (
-    <View style={s.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000000" />
+    <CasillasLayout
+      navigation={navigation}
+      activeRoute="Materiais"
+      title={t('materiais.title')}
+      subtitle={t('materiais.layoutSubtitle')}
+      terminalText={terminalText}
+      shareText={montarRelatorio()}
+    >
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('materiais.filter')}</Text>
 
-      <View style={s.header}>
-        <Text style={s.title}>11. {t('materiais.title')}</Text>
-        <Text style={s.sub}>
-          {t('materiais.layoutSubtitle')}
-        </Text>
-      </View>
-
-      <View style={s.tabs}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <View style={ls.optionWrap}>
           {GRUPOS.map((item) => (
             <TouchableOpacity
               key={item}
-              style={[s.tab, grupo === item && s.tabAtiva]}
+              style={[
+                s.btnTipo,
+                grupo === item && s.btnTipoAtivo
+              ]}
               onPress={() => setGrupo(item)}
             >
-              <Text style={[s.tabText, grupo === item && s.tabTextAtiva]}>
+              <Text
+                style={[
+                  s.btnTipoText,
+                  grupo === item && s.btnTipoTextAtivo
+                ]}
+              >
                 {t(GROUP_KEYS[item])}
               </Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
-      </View>
-
-      <ScrollView
-        style={s.content}
-        contentContainerStyle={{ paddingBottom: 112 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.txtHeadTab}>
-          <Text style={s.txtYellow}>{t('materiais.inputData')}</Text>
-          <Text style={s.txtWhite}>
-            {t('materiais.material')}
-          </Text>
         </View>
-
-        {lista.map((item) => (
-          <MaterialCard key={item.nome} item={item} />
-        ))}
-      </ScrollView>
-
-      <View style={s.bottom}>
-        <TouchableOpacity
-          style={s.bottomButton}
-          onPress={() => navigation.navigate('Dashboard')}
-        >
-          <Text style={s.bottomText}>{t('common.home')}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={s.bottomButton}
-          onPress={() => setModal(true)}
-        >
-          <Text style={s.bottomText}>{t('layout.viewAll')}</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={s.bottomButton}
-          onPress={compartilhar}
-        >
-          <Text style={s.bottomText}>{t('layout.shareBtn')}</Text>
-        </TouchableOpacity>
       </View>
 
-      <Modal visible={modal} animationType="slide" transparent>
-        <View style={s.modalFundo}>
-          <View style={s.modalBox}>
-            <Text style={s.modalTitle}>{t('materiais.title')}</Text>
+      <View style={s.card}>
+        <Text style={s.cardTitle}>{t('materiais.title')}</Text>
+        <Text style={s.txtGray}>{t('materiais.inputData')} — {t('materiais.material')}</Text>
+      </View>
 
-            <ScrollView>
-              <Text style={s.modalText}>{montarRelatorio()}</Text>
-            </ScrollView>
+      {lista.map((item) => (
+        <View key={item.id} style={s.card}>
+          <Text style={s.cardTitle}>{localizeMaterial(item, 'nome')}</Text>
 
-            <TouchableOpacity
-              style={s.modalButton}
-              onPress={() => setModal(false)}
-            >
-              <Text style={s.modalButtonText}>{t('common.close')}</Text>
-            </TouchableOpacity>
+          <View style={s.gridInputs}>
+            <View style={s.boxInputHalf}>
+              <Text style={s.txtGray}>{t('materiais.categoryCol')}</Text>
+              <Text style={s.txtWhite}>{localizeMaterial(item, 'grupo')}</Text>
+            </View>
+
+            <View style={s.boxInputHalf}>
+              <Text style={s.txtGray}>{t('materiais.hardnessCol')}</Text>
+              <Text style={s.txtWhite}>{item.dureza}</Text>
+            </View>
           </View>
+
+          <View style={s.gridInputs}>
+            <View style={s.boxInputHalf}>
+              <Text style={s.txtGray}>Vc HSS</Text>
+              <Text style={s.txtYellow}>{item.hss} m/min</Text>
+            </View>
+
+            <View style={s.boxInputHalf}>
+              <Text style={s.txtGray}>{t('materiais.vcCarbide')}</Text>
+              <Text style={s.txtYellow}>{item.md} m/min</Text>
+            </View>
+          </View>
+
+          <View style={s.separator} />
+
+          <Text style={s.txtGray}>{t('materiais.feed')}</Text>
+          <Text style={s.txtWhite}>{item.avanco}</Text>
+
+          <Text style={s.txtGray}>{t('materiais.tool')}</Text>
+          <Text style={s.txtWhite}>{localizeMaterial(item, 'ferramenta')}</Text>
+
+          <Text style={s.txtGray}>{t('materiais.cooling')}</Text>
+          <Text style={s.txtWhite}>{localizeMaterial(item, 'refrigeracao')}</Text>
+
+          <Text style={s.txtGray}>{t('materiais.application')}</Text>
+          <Text style={s.txtWhite}>{localizeMaterial(item, 'aplicacao')}</Text>
+
+          <View style={s.separator} />
+
+          <Text style={s.txtGray}>{t('materiais.notes')}</Text>
+          <Text style={s.txtMuted}>{localizeMaterial(item, 'obs')}</Text>
         </View>
-      </Modal>
-    </View>
+      ))}
+    </CasillasLayout>
   );
+}
+
+function getLocalStyles(theme) {
+  return StyleSheet.create({
+    optionWrap: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 6
+    }
+  });
 }
