@@ -35,8 +35,7 @@ export default function DashboardScreen({ navigation }) {
   const SUPORTE = [
     { titulo: t('modules.config.title'), subtitulo: t('modules.config.desc'), rota: 'Config', icone: '⚙️' },
     { titulo: t('modules.manualMod.title'), subtitulo: t('modules.manualMod.desc'), rota: 'Manual', icone: '📘' },
-    { titulo: t('modules.sobre.title'), subtitulo: t('modules.sobre.desc'), rota: 'Sobre', icone: 'ℹ️' },
-    { titulo: 'Testes QA', subtitulo: 'Rodar todos os testes unitários', rota: 'Testes', icone: '🧪' }
+    { titulo: t('modules.sobre.title'), subtitulo: t('modules.sobre.desc'), rota: 'Sobre', icone: 'ℹ️' }
   ];
 
   function abrirModulo(rota) {

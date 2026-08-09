@@ -27,9 +27,6 @@ import ConfigScreen from '../screens/ConfigScreen';
 import ManualScreen from '../screens/ManualScreen';
 import SobreScreen from '../screens/SobreScreen';
 
-// Tela de testes (dev/QA)
-import TestScreen from '../screens/TestScreen';
-
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
@@ -62,7 +59,6 @@ export default function AppNavigator() {
         <Stack.Screen name="Config" component={ConfigScreen} />
         <Stack.Screen name="Manual" component={ManualScreen} />
         <Stack.Screen name="Sobre" component={SobreScreen} />
-        <Stack.Screen name="Testes" component={TestScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
