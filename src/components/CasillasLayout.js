@@ -71,7 +71,8 @@ export default function CasillasLayout({
   subtitle,
   children,
   terminalText,
-  shareText
+  shareText,
+  contentScrollRef
 }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
@@ -424,6 +425,7 @@ export default function CasillasLayout({
       </View>
 
       <ScrollView
+        ref={contentScrollRef}
         style={{ flex: 1, paddingHorizontal: 8, paddingTop: 8 }}
         contentContainerStyle={{ paddingBottom: 125 }}
         showsVerticalScrollIndicator={false}
