@@ -156,6 +156,7 @@ export default function MateriaisScreen({ navigation }) {
   const ls = getLocalStyles(theme);
 
   const [grupo, setGrupo] = useState('Todos');
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
   const scrollRef = useRef(null);
 
   // Scroll to top when filter changes
@@ -163,6 +164,7 @@ export default function MateriaisScreen({ navigation }) {
     if (scrollRef.current) {
       scrollRef.current.scrollTo({ y: 0, animated: true });
     }
+    setSelectedMaterial(null);
   }, [grupo]);
 
   function localizeMaterial(item, field) {
@@ -285,13 +287,34 @@ export default function MateriaisScreen({ navigation }) {
     return linhas.join('\n');
   }
 
-  const terminalText = [
-    `${t('materiais.filter')}: ${t(GROUP_KEYS[grupo])}`,
-    `${t('materiais.displayedCount')}: ${lista.length}`,
-    ...lista.slice(0, 5).map((m) => `${m.nome}: Vc HSS ${m.hss}, MD ${m.md}`),
-    lista.length > 5 ? `... +${lista.length - 5} ${t('materiais.displayedCount').toLowerCase()}` : '',
-    `${t('materiais.warning')}`
-  ].filter(Boolean).join('\n');
+  const terminalText = (() => {
+    const selected = selectedMaterial ? lista.find(m => m.id === selectedMaterial) : null;
+    
+    if (selected) {
+      return [
+        `▸ MATERIAL: ${selected.nome}`,
+        `▸ ${t('materiais.group')}: ${localizeMaterial(selected, 'grupo')}`,
+        `▸ ${t('materiais.hardnessCol')}: ${selected.dureza}`,
+        `▸ Vc HSS: ${selected.hss} m/min`,
+        `▸ ${t('materiais.vcCarbide')}: ${selected.md} m/min`,
+        `▸ ${t('materiais.feed')}: ${selected.avanco}`,
+        `▸ ${t('materiais.tool')}: ${localizeMaterial(selected, 'ferramenta')}`,
+        `▸ ${t('materiais.cooling')}: ${localizeMaterial(selected, 'refrigeracao')}`,
+        `▸ ${t('materiais.application')}: ${localizeMaterial(selected, 'aplicacao')}`,
+        `▸ ${t('materiais.notes')}: ${localizeMaterial(selected, 'obs')}`,
+        '',
+        `${t('materiais.warning')}`
+      ].join('\n');
+    }
+
+    return [
+      `${t('materiais.filter')}: ${t(GROUP_KEYS[grupo])}`,
+      `${t('materiais.displayedCount')}: ${lista.length}`,
+      ...lista.slice(0, 5).map(m => `${m.nome}: Vc HSS ${m.hss}, MD ${m.md}`),
+      lista.length > 5 ? `... +${lista.length - 5} ${t('materiais.displayedCount').toLowerCase()}` : '',
+      `${t('materiais.warning')}`
+    ].filter(Boolean).join('\n');
+  })();
 
   return (
     <CasillasLayout
@@ -303,25 +326,17 @@ export default function MateriaisScreen({ navigation }) {
       shareText={montarRelatorio()}
       contentScrollRef={scrollRef}
     >
+      {/* ═══ FILTRO POR CLASSE ═══ */}
       <View style={s.card}>
         <Text style={s.cardTitle}>{t('materiais.filter')}</Text>
-
         <View style={ls.optionWrap}>
           {GRUPOS.map((item) => (
             <TouchableOpacity
               key={item}
-              style={[
-                s.btnTipo,
-                grupo === item && s.btnTipoAtivo
-              ]}
+              style={[s.btnTipo, grupo === item && s.btnTipoAtivo]}
               onPress={() => setGrupo(item)}
             >
-              <Text
-                style={[
-                  s.btnTipoText,
-                  grupo === item && s.btnTipoTextAtivo
-                ]}
-              >
+              <Text style={[s.btnTipoText, grupo === item && s.btnTipoTextAtivo]}>
                 {t(GROUP_KEYS[item])}
               </Text>
             </TouchableOpacity>
@@ -329,59 +344,92 @@ export default function MateriaisScreen({ navigation }) {
         </View>
       </View>
 
+      {/* ═══ LISTA DE MATERIAIS DA CLASSE ═══ */}
       <View style={s.card}>
         <Text style={s.cardTitle}>{t('materiais.title')}</Text>
-        <Text style={s.txtGray}>{t('materiais.inputData')} — {lista.length} {t('materiais.displayedCount').toLowerCase()}</Text>
+        <Text style={s.txtGray}>
+          {t('materiais.inputData')} — {lista.length} {t('materiais.displayedCount').toLowerCase()}
+        </Text>
       </View>
 
-      {lista.map((item) => (
-        <View key={item.id} style={s.card}>
-          <Text style={s.cardTitle}>{localizeMaterial(item, 'nome')}</Text>
+      {lista.map((item) => {
+        const isOpen = selectedMaterial === item.id;
+        return (
+          <View key={item.id} style={s.card}>
+            {/* ═══ CABEÇALHO CLICÁVEL ═══ */}
+            <TouchableOpacity
+              style={[ls.materialHeader, isOpen && ls.materialHeaderActive]}
+              onPress={() => setSelectedMaterial(isOpen ? null : item.id)}
+              activeOpacity={0.7}
+            >
+              <Text style={[s.cardTitle, isOpen && ls.materialTitleActive]}>
+                {localizeMaterial(item, 'nome')}
+              </Text>
+              <Text style={ls.materialArrow}>
+                {isOpen ? '▾' : '▸'}
+              </Text>
+            </TouchableOpacity>
 
-          <View style={s.gridInputs}>
-            <View style={s.boxInputHalf}>
-              <Text style={s.txtGray}>{t('materiais.categoryCol')}</Text>
-              <Text style={s.txtWhite}>{localizeMaterial(item, 'grupo')}</Text>
-            </View>
+            {/* ═══ RESUMO RÁPIDO (sempre visível) ═══ */}
+            {!isOpen && (
+              <View style={ls.materialSummary}>
+                <Text style={s.txtGray}>{localizeMaterial(item, 'grupo')}</Text>
+                <View style={ls.summaryRow}>
+                  <Text style={ls.summaryTag}>Vc HSS: {item.hss}</Text>
+                  <Text style={ls.summaryTag}>MD: {item.md}</Text>
+                  <Text style={ls.summaryTag}>{item.dureza}</Text>
+                </View>
+              </View>
+            )}
 
-            <View style={s.boxInputHalf}>
-              <Text style={s.txtGray}>{t('materiais.hardnessCol')}</Text>
-              <Text style={s.txtWhite}>{item.dureza}</Text>
-            </View>
+            {/* ═══ DETALHES COMPLETOS (expandido) ═══ */}
+            {isOpen && (
+              <View style={ls.materialDetails}>
+                <View style={s.gridInputs}>
+                  <View style={s.boxInputHalf}>
+                    <Text style={s.txtGray}>{t('materiais.categoryCol')}</Text>
+                    <Text style={s.txtWhite}>{localizeMaterial(item, 'grupo')}</Text>
+                  </View>
+                  <View style={s.boxInputHalf}>
+                    <Text style={s.txtGray}>{t('materiais.hardnessCol')}</Text>
+                    <Text style={s.txtWhite}>{item.dureza}</Text>
+                  </View>
+                </View>
+
+                <View style={s.gridInputs}>
+                  <View style={s.boxInputHalf}>
+                    <Text style={s.txtGray}>Vc HSS</Text>
+                    <Text style={s.txtYellow}>{item.hss} m/min</Text>
+                  </View>
+                  <View style={s.boxInputHalf}>
+                    <Text style={s.txtGray}>{t('materiais.vcCarbide')}</Text>
+                    <Text style={s.txtYellow}>{item.md} m/min</Text>
+                  </View>
+                </View>
+
+                <View style={s.separator} />
+
+                <Text style={s.txtGray}>{t('materiais.feed')}</Text>
+                <Text style={s.txtWhite}>{item.avanco}</Text>
+
+                <Text style={s.txtGray}>{t('materiais.tool')}</Text>
+                <Text style={s.txtWhite}>{localizeMaterial(item, 'ferramenta')}</Text>
+
+                <Text style={s.txtGray}>{t('materiais.cooling')}</Text>
+                <Text style={s.txtWhite}>{localizeMaterial(item, 'refrigeracao')}</Text>
+
+                <Text style={s.txtGray}>{t('materiais.application')}</Text>
+                <Text style={s.txtWhite}>{localizeMaterial(item, 'aplicacao')}</Text>
+
+                <View style={s.separator} />
+
+                <Text style={s.txtGray}>{t('materiais.notes')}</Text>
+                <Text style={s.txtMuted}>{localizeMaterial(item, 'obs')}</Text>
+              </View>
+            )}
           </View>
-
-          <View style={s.gridInputs}>
-            <View style={s.boxInputHalf}>
-              <Text style={s.txtGray}>Vc HSS</Text>
-              <Text style={s.txtYellow}>{item.hss} m/min</Text>
-            </View>
-
-            <View style={s.boxInputHalf}>
-              <Text style={s.txtGray}>{t('materiais.vcCarbide')}</Text>
-              <Text style={s.txtYellow}>{item.md} m/min</Text>
-            </View>
-          </View>
-
-          <View style={s.separator} />
-
-          <Text style={s.txtGray}>{t('materiais.feed')}</Text>
-          <Text style={s.txtWhite}>{item.avanco}</Text>
-
-          <Text style={s.txtGray}>{t('materiais.tool')}</Text>
-          <Text style={s.txtWhite}>{localizeMaterial(item, 'ferramenta')}</Text>
-
-          <Text style={s.txtGray}>{t('materiais.cooling')}</Text>
-          <Text style={s.txtWhite}>{localizeMaterial(item, 'refrigeracao')}</Text>
-
-          <Text style={s.txtGray}>{t('materiais.application')}</Text>
-          <Text style={s.txtWhite}>{localizeMaterial(item, 'aplicacao')}</Text>
-
-          <View style={s.separator} />
-
-          <Text style={s.txtGray}>{t('materiais.notes')}</Text>
-          <Text style={s.txtMuted}>{localizeMaterial(item, 'obs')}</Text>
-        </View>
-      ))}
+        );
+      })}
     </CasillasLayout>
   );
 }
@@ -392,6 +440,48 @@ function getLocalStyles(theme) {
       flexDirection: 'row',
       flexWrap: 'wrap',
       gap: 6
+    },
+    materialHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: 4
+    },
+    materialHeaderActive: {
+      borderBottomWidth: 1,
+      borderBottomColor: theme.yellow || '#FFD700',
+      paddingBottom: 8,
+      marginBottom: 4
+    },
+    materialTitleActive: {
+      color: theme.yellow || '#FFD700'
+    },
+    materialArrow: {
+      color: theme.yellow || '#FFD700',
+      fontSize: 18,
+      fontWeight: 'bold'
+    },
+    materialSummary: {
+      marginTop: 4,
+      gap: 4
+    },
+    summaryRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 6
+    },
+    summaryTag: {
+      color: theme.txtGray || '#888',
+      fontSize: 11,
+      backgroundColor: theme.inputBg || '#1a1a2e',
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 4,
+      overflow: 'hidden'
+    },
+    materialDetails: {
+      marginTop: 8,
+      gap: 4
     }
   });
 }
