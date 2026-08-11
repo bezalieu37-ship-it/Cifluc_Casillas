@@ -466,8 +466,9 @@ function montarGcodeSelecionado() {
       `${t('recartilhas.support')}: ${typeSupport}`,
       '',
       t('recartilhas.inputs'),
-      `${t('recartilhas.externalDiameter')}: ${n(diametro).toFixed(3)} mm`,
-      `${t('recartilhas.internalDiameter')}: ${n(diametroInterno).toFixed(3)} mm`,
+      tipo.interno
+        ? `${t('recartilhas.internalDiameter')}: ${n(diametroInterno).toFixed(3)} mm`
+        : `${t('recartilhas.externalDiameter')}: ${n(diametro).toFixed(3)} mm`,
       `${t('recartilhas.pitch')}: ${n(passo).toFixed(3)} mm`,
       `${t('recartilhas.length')}: ${n(comprimento).toFixed(3)} mm`,
       '',
@@ -601,14 +602,16 @@ function montarGcodeSelecionado() {
       <View style={s.card}>
         <Text style={s.cardTitle}>{t('recartilhas.inputData')}</Text>
 
-        {InputCampo(
+        {/* Diâmetro externo: só para operações EXTERNAS */}
+        {!tipo.interno && InputCampo(
           t('recartilhas.externalDiameterInput'),
           diametro,
           setDiametro,
           'Ex: 20'
         )}
 
-        {InputCampo(
+        {/* Diâmetro interno: só para operações INTERNAS */}
+        {tipo.interno && InputCampo(
           t('recartilhas.internalDiameterInput'),
           diametroInterno,
           setDiametroInterno,
