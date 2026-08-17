@@ -12,10 +12,12 @@ import {
 
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function DashboardScreen({ navigation }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
 
   const MODULOS = [
     { titulo: t('modules.roscas.title'), subtitulo: t('modules.roscas.desc'), rota: 'Roscas', icone: '🧵' },
@@ -46,7 +48,7 @@ export default function DashboardScreen({ navigation }) {
 
   return (
     <View style={s.container}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
       <ImageBackground
         source={require('../../assets/dashboard-bg.png')}
@@ -54,7 +56,7 @@ export default function DashboardScreen({ navigation }) {
         resizeMode="cover"
       >
         <View style={s.overlay}>
-          <View style={s.header}>
+          <View style={[s.header, { paddingTop: Math.max(insets.top, 24) + 8 }]}>
             <Text style={s.logo}>CIFLUC</Text>
             <Text style={s.title}>{t('dashboard.title')}</Text>
             <Text style={s.subtitle}>{t('dashboard.subtitle')}</Text>

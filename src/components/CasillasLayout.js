@@ -384,9 +384,9 @@ export default function CasillasLayout({
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.bg }}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
-      <View style={{ paddingTop: 45, paddingBottom: 8, paddingHorizontal: 16, backgroundColor: theme.headerBg, borderBottomWidth: 1, borderBottomColor: theme.border }}>
+      <View style={{ paddingTop: Math.max(insets.top, 24) + 8, paddingBottom: 8, paddingHorizontal: 16, backgroundColor: theme.headerBg, borderBottomWidth: 1, borderBottomColor: theme.border }}>
         <Text style={{ color: theme.yellow, fontSize: 16, fontWeight: '900' }}>
           CIFLUC GEMINI CASILLAS
         </Text>
@@ -482,7 +482,7 @@ export default function CasillasLayout({
       </View>
 
       <Modal visible={modalVisivel} animationType="slide">
-        <View style={{ flex: 1, backgroundColor: theme.bg, paddingTop: 45, paddingHorizontal: 12 }}>
+        <View style={{ flex: 1, backgroundColor: theme.bg, paddingTop: Math.max(insets.top, 24) + 8, paddingHorizontal: 12 }}>
           <Text style={{ color: theme.yellow, fontSize: 16, fontWeight: '900', marginBottom: 10 }}>
             {t('layout.completeReport')}
           </Text>

@@ -14,6 +14,7 @@ import {
 
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 function getStyles(theme) {
   return StyleSheet.create({
@@ -220,6 +221,7 @@ const SECTION_SPECS = [
 export default function ManualScreen({ navigation }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
   const styles = getStyles(theme);
   const [modal, setModal] = useState(false);
 
@@ -270,9 +272,9 @@ export default function ManualScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: Math.max(insets.top, 24) + 8 }]}>
         <Text style={styles.title}>{t('manual.title')}</Text>
         <Text style={styles.sub}>{t('manual.manualTextSubtitle')}</Text>
       </View>

@@ -10,7 +10,7 @@ function ErrorFallback({ error, onReset }) {
 
   return (
     <View style={errorStyles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="light-content" />
       <Text style={errorStyles.logo}>CIFLUC</Text>
       <Text style={errorStyles.title}>{t('common.unexpectedErrorTitle')}</Text>
       <Text style={errorStyles.subtitle}>{t('common.unexpectedErrorText')}</Text>

@@ -310,7 +310,7 @@ export default function TestScreen() {
 
   return (
     <View style={[s.container, { backgroundColor: theme.bg }]}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
       {/* Header */}
       <View style={[s.header, { backgroundColor: theme.headerBg, borderBottomColor: theme.border }]}>

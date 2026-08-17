@@ -15,10 +15,12 @@ import {
 
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SobreScreen({ navigation }) {
   const { t } = useLanguage();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
   const [modal, setModal] = useState(false);
   const moduleKeys = [
     'moduleThreads', 'moduleGears', 'moduleRpm', 'moduleCones',
@@ -95,9 +97,9 @@ export default function SobreScreen({ navigation }) {
 
   return (
     <View style={s.container}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
-      <View style={s.header}>
+      <View style={[s.header, { paddingTop: Math.max(insets.top, 24) + 8 }]}>
         <Text style={s.title}>{t('sobre.title')}</Text>
         <Text style={s.sub}>{t('sobre.subtitle')}</Text>
       </View>

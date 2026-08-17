@@ -22,6 +22,7 @@ import {
 } from '../services/historicoService';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LANGUAGES } from '../i18n';
 
 const STORAGE_CONFIG_KEY = '@CIFLUC_CASILLAS_CONFIG';
@@ -44,6 +45,7 @@ const THEMES = [
 export default function ConfigScreen({ navigation }) {
   const { t, langCode, changeLanguage } = useLanguage();
   const { theme, mode, changeTheme } = useTheme();
+  const insets = useSafeAreaInsets();
   const [config, setConfig] = useState(DEFAULT_CONFIG);
   const [qtdeHistorico, setQtdeHistorico] = useState(0);
   const [carregando, setCarregando] = useState(true);
@@ -232,7 +234,7 @@ export default function ConfigScreen({ navigation }) {
   if (carregando) {
     return (
       <View style={[s.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+        <StatusBar barStyle={theme.statusBar} />
         <ActivityIndicator size="large" color={theme.yellow} />
         <Text style={[s.configValue, { marginTop: 12 }]}>{t('common.loading')}</Text>
       </View>
@@ -244,9 +246,9 @@ export default function ConfigScreen({ navigation }) {
 
   return (
     <View style={s.container}>
-      <StatusBar barStyle={theme.statusBar} backgroundColor={theme.statusBarBg} />
+      <StatusBar barStyle={theme.statusBar} />
 
-      <View style={s.header}>
+      <View style={[s.header, { paddingTop: Math.max(insets.top, 24) + 8 }]}>
         <TouchableOpacity style={s.backBtn} onPress={() => navigation.goBack()}>
           <Text style={s.backBtnText}>{t('common.back')}</Text>
         </TouchableOpacity>
