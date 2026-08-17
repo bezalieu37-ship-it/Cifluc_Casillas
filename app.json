@@ -15,9 +15,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "privacyPolicyUrl": "https://bezalieu37-ship-it.github.io/Cifluc_Casillas/"
     },
-    "privacyPolicyUrl": "https://bezalieu37-ship-it.github.io/Cifluc_Casillas/",
     "extra": {
       "eas": {
         "projectId": "a332a44c-7d34-4398-acde-9477c23dbe92"
