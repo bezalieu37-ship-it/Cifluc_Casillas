@@ -151,6 +151,7 @@ const fr = {
     pitchDia: 'Diamètre de pas (d2)',
     majorDiaNut: 'Diamètre intérieur de l\'écrou (D)',
     minorDiaNut: 'Diamètre intérieur de l\'écrou (D1)',
+    drillSuggestion: 'Suggestion de foret (alésage écrou)',
     helixAngle: 'Angle d\'hélice (λ)',
     verification: 'VÉRIFICATION DIMENSIONNELLE',
     majorDia: 'Diamètre Extérieur',

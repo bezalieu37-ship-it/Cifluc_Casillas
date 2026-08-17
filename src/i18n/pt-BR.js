@@ -151,6 +151,7 @@ const ptBR = {
     pitchDia: 'Diâmetro efetivo (d2)',
     majorDiaNut: 'Diâmetro maior da porca (D)',
     minorDiaNut: 'Diâmetro menor da porca (D1)',
+    drillSuggestion: 'Sugestão de broca (furo porca)',
     helixAngle: 'Ângulo da hélice (λ)',
     verification: 'VERIFICAÇÃO DIMENSIONAL',
     majorDia: 'Diâmetro Maior',

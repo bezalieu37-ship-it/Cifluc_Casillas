@@ -151,6 +151,7 @@ const es = {
     pitchDia: 'Diámetro de paso (d2)',
     majorDiaNut: 'Diámetro mayor de la tuerca (D)',
     minorDiaNut: 'Diámetro menor de la tuerca (D1)',
+    drillSuggestion: 'Sugerencia de broca (boqueta tuerca)',
     helixAngle: 'Ángulo de hélice (λ)',
     verification: 'VERIFICACIÓN DIMENSIONAL',
     majorDia: 'Diámetro Mayor',

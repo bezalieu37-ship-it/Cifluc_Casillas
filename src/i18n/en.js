@@ -151,6 +151,7 @@ const en = {
     pitchDia: 'Pitch diameter (d2)',
     majorDiaNut: 'Nut major diameter (D)',
     minorDiaNut: 'Nut minor diameter (D1)',
+    drillSuggestion: 'Drill suggestion (nut bore)',
     helixAngle: 'Helix angle (λ)',
     verification: 'DIMENSIONAL VERIFICATION',
     majorDia: 'Major Diameter',

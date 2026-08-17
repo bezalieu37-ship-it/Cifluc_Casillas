@@ -285,6 +285,7 @@ export default function RoscasScreen({ navigation }) {
     const d2_efetivo = d2_calc;
     const D_maior_porca = d;
     const D1_menor_porca = D1_calc;
+    const sugestaoBroca = d - p; // Tapping drill: furo da porca antes de rosquear (~75% rosca)
 
     setD2Calc(d2_efetivo);
     setD3Calc(d3_parafuso);
@@ -303,6 +304,7 @@ export default function RoscasScreen({ navigation }) {
       { n: `${t('roscas.pitchDia')}`, v: `${d2_efetivo.toFixed(2)} mm` },
       { n: `${t('roscas.majorDiaNut')}`, v: `${D_maior_porca.toFixed(2)} mm` },
       { n: `${t('roscas.minorDiaNut')}`, v: `${D1_menor_porca.toFixed(2)} mm` },
+      { n: `${t('roscas.drillSuggestion')}`, v: `${sugestaoBroca.toFixed(2)} mm` },
       { n: `${t('roscas.helixAngle')}`, v: `${ang_helice.toFixed(2)}°` },
     ]);
 
